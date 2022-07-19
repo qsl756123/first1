@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理解MVVM</title>
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>
+</head>
+<body>
+    <!--
+        MVM模型
+            1. M:模型(Model) : data中的数据
+            2. V:视图(View) :模板代码_
+            3. VM:视图模型(ViewModel): Vue实例
+        观察发现:
+            1. data中所有的属性，最后都出现在了 vm身上。
+            2.vm身上所有的属性及Vue原型上所有属性，在Vue模板中都可以直接使用 例如我在div中的测试。
+    -->
+
+    <!--准备好一个容器 View-->
+    <div id="box">
+        <h1>学校名称：{{name}}</h1>
+        <h1>学校地址：{{address}}</h1>
+        <!-- <h1>测试一下1：{{$options}}</h1>
+        <h1>测试一下2：{{$slots}}</h1>
+        <h1>测试一下3：{{_isMounted}}</h1> -->
+        
+    </div>
+    
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+
+        var vm = new Vue({//ViewModel
+            el:'#box',
+            data(){
+                return {
+                    //Model
+                    name:'四川工业科技学院',
+                    address:'德阳市罗江区'
+                };
+            },
+        })
+        console.log(vm);
+    </script>
+</body>
+</html>

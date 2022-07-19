@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的修饰符</title>
+    <link rel="icon" href="D:\HTML文件\Vue\favicon.ico">
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>
+    <style>
+        *{
+            margin-top: 10px;
+        }
+
+        .box2{
+            height: 100px;
+            background-color: red;
+        }
+
+        .box3{
+            padding: 5px;
+            background-color: blue;
+        }
+
+        .box4{
+            padding: 5px;
+            background-color: green;
+        }
+
+        .list{
+            width: 100px;
+            height: 100px;
+            background-color: burlywood;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        Vue中的事件修饰符:
+            1. prevent:阻止默认事件(常用) ;
+            2.stop:阻止事件冒泡(常用)
+            3. once:事件只触发.次 (常用) ;
+            4.capture:使用事件的捕获模式;
+            5.self:只有event.target是当前操作的元素是才触发事件:
+            6.passive:事件的默认行为立即执行，无需等待事件回调执行完毕:
+     -->
+
+    <!-- 容器 -->
+    <div id="box1">
+        <h2>你好{{name}}</h2>
+        <!--  prevent:阻止默认事件(常用) prevent-->
+        <a href="http://www.baidu.com" @click.prevent="showInfo">点我提示</a>
+       
+        <!-- 组织冒泡排序(常用) 不写.stop div也会触发事件-->
+        <div class="box2" @click="showInfo">
+            <!-- <button @click.stop="showInfo">点我提示</button> -->
+            <!-- 修饰符可以连续写 -->
+            <a href="http://www.baidu.com" @click.stop.prevent="showInfo">点我提示</a>
+        </div>
+
+        <!-- 事件只触发一次（常用 ）once -->
+        <button @click.once="showInfo">点我提示</button>
+
+        <!-- 使用事件的捕获模式 capture -->
+        <div class="box3" @click.capture="showMsg(1)">
+            divbox3
+            <div class="box4" @click="showMsg(2)">
+                divbox4
+            </div>
+        </div>
+
+        <!-- 只有event.target是当前操作的元素是才触发事件 -->
+        <div class="box2" @click.self="showInfo">
+            <button @click="showInfo">点我提示</button>
+        </div>
+
+        <!-- 事件的默认行为立即执行，无需等待事件回调执行完毕
+                不加passive时，我们滚动一下滚轮，会执行demo，
+                循环10000次1，等循环完成时，滚轮才会动，加了
+                后，循环不影响滚轮滚动
+        -->
+        <ul @wheel="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    
+   
+    <script type="text/javascript">
+        Vue.config.productionTip = false //取消提示
+            
+        new Vue({
+            el:'#box1',
+            data:{
+                name:'小乔',
+            },
+            methods:{
+                showInfo(e){
+                    alert('你好同学')
+                },
+                showMsg(msg){
+                    console.log(msg)
+                },
+                demo(){
+                    for(var i = 0 ; i < 10000 ; i++){
+                        console.log("1")
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+    
+</html>

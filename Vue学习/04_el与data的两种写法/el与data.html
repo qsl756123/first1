@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>el和data</title>
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>
+</head>
+<body>
+
+    <!-- 
+        data与e1的2种写法
+            1.e1有2种写法
+                (1) .new Vue时候配置e1属性。
+                (2).先创建Vue实例，随后再通过vm . $mount( ' #root ' )指定e1的值。
+            2. data有2种写法
+                (1).对象式
+                (2).函数式
+                如何选择:目前哪种写法都可以，以后学习到组件时，data必须使用函数式，否则会报锴。
+            3.一个重要的原则:
+                由Vue管理的函数，一定 不要写箭头函数，一且写了箭头函数，this就不再 是Vue实例了。 
+    -->
+
+
+    <h1 id="root">你好，{{name}}</h1>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+
+        //el的简写
+        /* var v = new Vue({
+            //el:'#root', //第一种
+            data:{ //第一种写法：对象式
+                name:'小乔'
+            }
+        })
+        //第二种，更灵活一点
+        v.$mount('#root'); */
+
+        //  data的简写
+        new Vue({
+            el:'#root',
+            data(){//第二种,函数式
+                //console.log("@@@",this)此处的this是Vue实例对象
+                return {
+                    name:'小乔'
+                };
+            },
+        })
+    </script>
+</body>
+</html>

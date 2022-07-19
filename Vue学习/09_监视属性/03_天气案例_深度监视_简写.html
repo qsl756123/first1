@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="D:\HTML文件\Vue\favicon.ico">
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>    
+    <title>天气切换</title>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //取消默认提示
+        
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                isHot:true,
+            },
+            computed:{
+                info(){
+                    return this.isHot?'炎热':'凉爽'
+                }
+            },
+            methods:{
+                changeWeather(){
+                    this.isHot = ! this.isHot
+                }
+            },
+            watch:{
+                //正常写法
+                /* isHot:{
+                    //immediate:true,
+                    //deep:true, //深度监视
+                    //当isHot时，handler会被调用
+                    handler(newValue,oldValue){
+                        console.log('isHot被切换了',newValue,oldValue)
+                    }
+                }, */
+                //简写
+                /* isHot(newValue,oldValue){
+                    console.log('isHot被切换了',newValue,oldValue)
+                } */
+            }
+        })
+
+        //正常写法
+       /*  vm.$watch('isHot',{
+            immediate:true,
+            deep:true, //深度监视
+            //当isHot时，handler会被调用
+            handler(newValue,oldValue){
+                console.log('isHot被切换了',newValue,oldValue)
+            }
+        }) */
+        //简写
+        vm.$watch('isHot',function(newValue,oldValue){
+            console.log('isHot被切换了',newValue,oldValue)
+        })
+    </script>
+</body>
+</html>

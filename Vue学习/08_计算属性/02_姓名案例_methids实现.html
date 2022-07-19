@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="D:\HTML文件\Vue\favicon.ico">
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>
+    <style>
+        #box{
+            width: 250px;
+            height: 100px;
+            background-color: aliceblue;
+            text-align: center;
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="box">
+        姓：<input type="text" v-model="fristName"><br/>
+        名：<input type="text" v-model="twoName"><br/>
+        姓名:<span>{{fullName()}}</span>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false;//取消默认提示
+
+    new Vue({
+        el:'#box',
+        data:{
+            fristName:'姓',
+            lastName:'名'
+        },
+        methods:{
+            fullName(){
+                return this.fristName + '-' + this.lastName
+            }
+        }
+    })
+</script>
+</html>

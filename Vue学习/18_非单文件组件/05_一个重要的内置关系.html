@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1.一个重要的内置关系：VueComponent.prototype.__proto__ === Vue.prototype
+        2.为什么要有这个关系呢：让组件实例对象（vc）可以访问放Vue原型上的属性、方法。
+     -->
+    <div id="root">
+        
+    </div>
+</body>
+    <script>
+        Vue.config.productionTip = false; //取消Vue在启动时生产提示
+    
+        //定义一个构造函数
+        /* function Dome(){
+            this.a = 1
+            this.b = 2
+        }
+        //创建一个Dome的实例对象
+        const d = new Dome();
+
+        console.log(Dome.prototype)//显示原型属性
+        console.log(d.__proto__)//隐式原型属性
+        console.log(Dome.prototype === d.__proto__)
+        Dome.prototype.x = 99
+        console.log('@',d) */
+        
+        const school = Vue.extend({
+            template: `
+                <div>
+                    <h2>学校名称：{{schoolName}}</h2>
+                    <h2>学校地址：{{address}}</h2>
+                </div>
+                `,
+            data(){
+                return{
+                    schoolName:'工科院',
+                    address:'四川德阳',
+                }
+            }
+        })
+        new Vue({
+            el:'#root',
+            data:{
+                msg:'你好'
+            },
+        })
+    </script>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/dayjs.min.js"></script>
+    <title>过滤器</title>
+</head>
+<body>
+    <div id="root">
+        <h2>显示格式化后的时间</h2>
+
+        <!-- 计算属性实现 -->
+        <h3>现在是：{{fmtTime}}</h3>
+        
+        <!-- methods实现 -->
+        <h3>现在是：{{getFmtTime()}}</h3>
+
+        <!-- 过滤器实现 -->
+        <h3>现在是：{{time | timeFormater}}</h3>
+
+        <!-- 过滤器实现（传参）（传我指定的显示样式） -->
+        <h3>现在是：{{time | timeFormater('YYYY_MM_DD')}}</h3>
+
+        <!-- 过滤器实现（传参）（多个过滤器的串联） -->
+        <h3>现在是：{{time | timeFormater('YYYY_MM_DD') | mySlice}}</h3>
+    </div>
+
+    <!-- 1、mySlice是写在newVue1中的，叫做局部过滤器，此时不能用 -->
+    <div id="root2">
+        <h2>{{msg | mySlice}}</h2>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false;
+
+    //2、将mySlice写在全局中
+    Vue.filter('mySlice',function(value){
+        return value.slice(0,4)
+    })
+
+    new Vue({
+        el:'#root',
+        data:{
+            time:1653709377603 //时间戳
+        },
+        computed: {
+            fmtTime(){
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        methods:{
+            getFmtTime(){
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        filters:{
+            //str="YYYY-MM-DD HH:mm:ss"当页面中没有给定时间戳样式，就按此默认样式展示
+            timeFormater(value,str="YYYY-MM-DD HH:mm:ss"){
+                return dayjs(value).format(str)
+            },
+            //只获取过滤后的前四位
+            /* mySlice(value){
+                return value.slice(0,4)
+            } */
+        }
+    })
+    new Vue({
+        el: '#root2',
+        data:{
+            msg:'你好小乔大123'
+        }
+    });
+</script>
+</html>

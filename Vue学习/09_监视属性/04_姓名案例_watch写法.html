@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="D:\HTML文件\Vue\favicon.ico">
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>
+    <style>
+        #box{
+            width: 250px;
+            height: 100px;
+            background-color: aliceblue;
+            text-align: center;
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        computed watch之间的区别:
+            1.computed能完成的功能，watch都 可以完成。
+            2.watch能完成的功能，computed不一 定能完成，例如: watch可以进行异步操作。
+        两个重要的小原则:
+            1.所被Vue管理的函数，最好写成普通函数，这样this的指向才是 vm 或 组件 实例对象。
+            2.所有不被Vue所管理的函数(定时器的回调函数、ajax的回调函数、promise的回调函数等)，最好写成箭头函数，
+                  这样this的指向才是vm或组件实例对象。
+    -->
+
+    <!-- 容器 -->
+    <div id="box">
+        姓：<input type="text" v-model="fristName"><br/>
+        名：<input type="text" v-model="lastName"><br/>
+        姓名:<span>{{fullName}}</span>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false;//取消默认提示
+
+    const vm = new Vue({
+        el:'#box',
+        data:{
+            fristName:'张',
+            lastName:'三',
+            fullName:'张-三'
+        },
+        watch:{
+            
+            fristName(Nval){
+                this.fullName = Nval + '-' +this.lastName
+                //看似计算属性更复杂，但是可以很方便的做异步任务
+                /* setInterval(() => {
+                    this.fullName = Nval + '-' +this.lastName
+                }, 1000); */
+            },
+            lastName(Nval){
+                this.fullName = this.fristName + '-' + Nval
+            }
+        }
+    })
+</script>
+</html>

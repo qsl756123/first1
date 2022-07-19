@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 问题：比如当js文件一直没启动时，页面会显示{{name}}
+        解决问题：v-cloak指令(没有值) :
+            1.本质是个特殊属性，Vue实例创建完中并接管容器后，会刪掉v-cloak属性。
+            2.使用css配合vcloak可以解决网速慢时页面展示出{{xx}}的问题。
+     -->
+     <div id="root">
+        <h2 v-cloak>{{name}}</h2>
+     </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+
+    new Vue({
+        el:'#root',
+        data:{ 
+            name:'小乔'
+        }
+    })
+</script>
+</html>

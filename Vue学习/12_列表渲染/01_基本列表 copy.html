@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本列表</title>
+    <link rel="icon" href="D:\HTML文件\Vue\favicon.ico">
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>
+</head>
+<body>
+    <!-- 
+        v-for指令:
+            1.用于展示列表数据
+            2.语法: v-for="(item,index) of xxx" :key="yyy"
+            3.可遍历:数组、对象、字符串(用的很少)、指定次数(用的很少) 
+    -->
+
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h2>人员列表（遍历数组）</h2>
+        <ul>
+            <li v-for="(person,index) of persons" :key="person.id">
+                {{person.name}}-{{person.age}}
+            </li>
+        </ul>
+        <!-- 遍历对象 -->
+        <h2>汽车信息（遍历对象）</h2>
+        <ul>
+            <li v-for="(val,k) of car" :key="k"> 
+                {{k}}-{{val}}
+            </li>
+        </ul>
+        <!-- 遍历字符串 -->
+        <h2>遍历字符串</h2>
+        <ul>
+            <li v-for="(char,index) of str" :key="index"> 
+                {{index}}-{{char}}
+            </li>
+        </ul>
+        <!-- 遍历次数 -->
+        <h2>遍历次数</h2>
+        <ul>
+            <li v-for="(number,index) of 7" :key="index"> 
+                {{number}}-{{index}}
+            </li>
+        </ul>
+    </div>
+    
+    <script type="text/javascript">
+         Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+                persons:[
+                    {id:'0001',name:'小乔',age:18},
+                    {id:'0002',name:'小唐',age:20},
+                    {id:'0003',name:'小李',age:21}
+                ],
+                car:{
+                    name:'法拉利911',
+                    price:'127.80-311.45万',
+                    color:'red'
+                },
+                str:'hello'
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+    <link rel="icon" href="D:\HTML文件\Vue\favicon.ico">
+    <script src="D:\HTML文件\Vue\js\vue.js"></script>
+</head>
+<body>
+    <!-- 
+        条件渲染:
+
+        1.v-if 
+                写法:
+                    (1).v-if="表达式”
+                    (2).v-else-if="表达式"
+                    (3),v-else="表达式”
+            适用于:切换频率较低的场景。
+            特点:不展示的DOM元索直接被移除。
+            注意: v-if可以和:v-else-if、v-else起使用， 但要求结构不能被“打
+        2.v- show
+            写法: v-show=" 表达式”
+            适用于:切换频率较高的场景。
+            特点:不展示的DOM元素未被移除，仅仅是使用样式隐减掉
+            
+        3.备注:使用v-if的时，元索可能无法获取到，而使用v-show定可以获取到。
+
+     -->
+    <div id="root">
+        <h2>n当前为{{n}}</h2>
+        <button @click="n++">点我</button>
+
+        <!-- 使用v-show做条件渲染 -->
+        <!-- <h2 v-show="false">你好呀{{name}}</h2> 
+        <h2 v-show="1 === 1">你好呀{{name}}</h2>  -->
+
+        <!-- 使用v-if做条件渲染 -->
+        <!-- <h2 v-if="false">你好呀{{name}}</h2>
+        <h2 v-if="1 === 1">你好呀{{name}}</h2> -->
+
+        <!-- v-else和v-else-if -->
+        <!-- v-if
+            >v-else-if
+            >v-else 
+            顺序跟js一样，中间加其他标签报错
+        -->
+
+        <!-- <h2 v-if="n === 1">小乔1</h2>
+        <h2 v-else-if="n === 2">小2乔</h2>
+        <h2 v-else-if="n === 3">小3乔</h2>
+        <h2 v-else-if="n === 4">小4乔</h2> -->
+        <!-- 上面都不满足执行 -->
+        <!-- <h2 v-else>3小乔</h2> -->
+
+        <template v-if=" n === 2">
+            <h2>你好</h2>
+            <h2>{{name}}</h2>
+            <h2>大帅哥</h2>
+        </template>
+    </div>
+    
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+                name:'小乔',
+                n:0
+            }
+        })
+    </script>
+</body>
+</html>

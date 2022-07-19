@@ -1,0 +1,2 @@
+prevent阻止默认行为
+例：<form @submit.prevent="demo"></form>
