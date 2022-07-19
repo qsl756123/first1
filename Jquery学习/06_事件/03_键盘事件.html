@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    
+    输入你的名字：<input type="text">
+    <p>按键的次数：<span>0</span></p>
+
+    <script>
+        $(function(){
+            //键盘按下事件keypress
+            var i = 0;
+            $("input").keypress(function(){
+                $("span").text(i+=1);
+            });
+
+            //键被按下keydown
+            $("input").keydown(function(){
+                $("input").css("background-color","yellow");
+            });
+            //键被松开keyup
+            $("input").keyup(function(){
+                $("input").css("background-color","white");
+            });
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        div{
+            background: gray;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="one">我是#id选择器</div><br/>
+    <div class="two">我是.class选择器</div><br/>
+    <div>我是标签选择器</div><br/>
+    <span>我也是标签选择器</span><br/><br/>
+    <input type="button" value="获取id是one的dom对象" onclick="fun1()" /><br/>
+    <input type="button" value="使用class的样式获取dom对象" onclick="fun2()" /><br/>
+    <input type="button" value="使用标签获取dom对象" onclick="fun3()" /><br/>
+    <input type="button" value="使用span标签获取dom对象" onclick="fun4()" /><br/>
+    <input type="button" value="*全部选择器" onclick="fun5()" /><br/>
+    <input type="button" value="*混用选择器" onclick="fun6()" /><br/>
+    <script>
+        //获取id是one的dom对象
+        function fun1(){
+            var obj = $('#one');
+            //使用jquery中改变样式的函数
+            obj.css('background','red')
+        }
+        //使用class的样式获取dom对象
+        function fun2(){
+            var obj = $('.two');
+            //使用jquery中改变样式的函数
+            obj.css('background','yellow')
+        }
+        //使用标签获取dom对象
+        function fun3(){
+            var obj = $('div');
+            //使用jquery中改变样式的函数
+            obj.css('background','blue')
+        }
+        //使用span标签获取dom对象
+        function fun4(){
+            var obj = $('span');
+            //使用jquery中改变样式的函数
+            obj.css('color','blue')
+            obj.css('fontSize','3em')
+        }
+        //全部选择器
+        function fun5(){
+            var obj = $('*');
+            //使用jquery中改变样式的函数
+            obj.css('display','none')
+        }
+        //混用选择器
+        function fun6(){
+            var obj = $('#one,.two,span');
+            //使用jquery中改变样式的函数
+            obj.css('display','none')
+        }
+    </script>
+</body>
+</html>

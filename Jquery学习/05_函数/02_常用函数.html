@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        #Div1{
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <select>
+        <option value="老虎">老虎</option>
+        <option value="豹子">豹子</option>
+        <option value="狮子">狮子</option>
+    </select><br><br>
+    <select>
+        <option value="亚洲">亚洲</option>
+        <option value="欧洲">欧洲</option>
+        <option value="美洲">美洲</option>
+    </select><br><br>
+    <div id="father" style="background: red;width:300px;height: 300px;">我是一个div</div><br><br>
+    <span>我是mysql<b>数据库</b></span><br><br>
+    <span>我是jdbc</span><br><br>
+    <input type="text" value="刘备">
+    <input type="text" value="张飞">
+    <input type="text" value="关羽">
+    <p>按钮</p>
+    <input type="button" id="btn1" value="使用remove删除父和子dom对象"><br><br>
+    <input type="button" id="btn2" value="使用remove删除子dom对象"><br><br>
+    <input type="button" id="btn3" value="使用append增加dom对象"><br><br>
+    <input type="button" id="btn4" value="获取DOM数组第一个匹配元素的内容"><br><br>
+    <input type="button" id="btn5" value="使用html设置dom对象的文本值"><br><br>
+    <input type="button" id="btn6" value="使用each循环非dom数组"><br><br>
+    <input type="button" id="btn7" value="使用each循环json"><br><br>
+    <input type="button" id="btn8" value="语法1：使用each循环dom数组"><br><br>
+    <input type="button" id="btn9" value="语法2：使用each循环dom数组"><br><br>
+    <script>
+        $(function(){
+            //使用remove删除父和子dom对象
+            $('#btn1').click(function(){
+                $('select').remove();
+            })
+            //使用remove删除子dom对象
+            $('#btn2').click(function(){
+                $('select').empty();
+            })
+            //使用append增加dom对象
+            $('#btn3').click(function(){
+                $('#father').append('<input type="button" value="我是增加的按钮"/>');
+                $('#father').append('<table border=1><tr><th>姓名</th><th>年纪</th></tr><tr><td>qiao</td><td>18</td></tr><tr><td>qing</td><td>18</td></tr></table>');
+            })
+            //获取DOM数组第一个匹配元素的内容
+            $('#btn4').click(function(){
+                alert($('span').html())//我是mysql<b>数据库</b>
+                alert($('span').text())//我是mysql数据库我是jdbc
+            })
+            //使用html设置dom对象的文本值
+            $('#btn5').click(function(){
+                $('span').html('我是新的<b>数据</b>');
+            })
+            //循环非dom数组
+            $('#btn6').click(function(){
+                var arr = ['小乔','小卿','小刘'];
+                $.each(arr,function(index,element){
+                    alert("循环变量："+index+"   ======   数组成员："+element)
+                }) 
+            })
+            //使用each循环json
+            $('#btn7').click(function(){
+                var json = {'name':'qiao','age':20}
+                $.each(json,function(i,n){
+                    alert("i是key："+i+"   ======   n是值："+n)
+                }) 
+            })
+            //语法1：使用each循环dom数组
+            $('#btn8').click(function(){
+                var domarry = $(':text')
+                $.each(domarry,function(i,n){
+                    //n是数组中的dom对象
+                    alert("i是key："+i+"   ======   n是值："+n.value)
+                }) 
+            })
+            //语法2：使用each循环dom数组
+            $('#btn9').click(function(){
+                $(':text').each(function(i,n){
+                    //n是数组中的dom对象
+                    alert("i是key："+i+"   ======   n是值："+n.value)
+                }) 
+            })
+        })
+            
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        .Div1{
+            width:100px;
+            height: 100px;
+            background:blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="one">0</div>
+    <div id="two">1</div>
+    <div>2
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <div>5</div><br>
+    <span>6</span><br>
+    <input type="button" id="btn1" value="第一个">
+    <input type="button" id="btn2" value="最后一个">
+    <input type="button" id="btn3" value="通过下标选择下标为3的">
+    <input type="button" id="btn4" value="获取小于=4下标的所有对象">
+    <input type="button" id="btn5" value="获取大于3下标的所有对象">
+    <input type="button" id="btn6" value="获取大于3下标的所有对象">
+    <script>
+        $(function(){
+            //当页面dom对象加载后，给对象绑定事件，因为此时button对象已经在内存中创建好了
+            
+            $('#btn1').click(function(){
+                var obj = $('div:first');
+                obj.addClass('Div1');
+            })
+
+            $('#btn2').click(function(){
+                var obj = $('div:last');
+                obj.addClass('Div1');
+            })
+
+            $('#btn3').click(function(){
+                var obj = $('div:eq(3)');
+                obj.addClass('Div1');
+            })
+
+            $('#btn4').click(function(){
+                var obj = $('div:lt(3)');
+                obj.addClass('Div1');
+            })
+
+            $('#btn5').click(function(){
+                var obj = $('div:gt(3)');
+                obj.addClass('Div1');
+            })
+        })
+    </script>
+</body>
+</html>

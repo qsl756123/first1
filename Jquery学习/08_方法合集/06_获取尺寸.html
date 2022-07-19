@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        #div1{
+            width: 300px;
+            height: 100px;
+            border: 10px solid red;
+            padding: 10px;
+            text-align: center;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <button id="btn">点我获取div的尺寸</button>
+    <script>
+        $(function(){
+            $('#btn').click(function(){
+                var txt = '';
+                //width()height(),获取元素的宽高（不包括内边距、边框或外边距）
+                /* txt = txt + 'div的宽度是：' + $('#div1').width()+'px'+'</br>';
+                txt = txt + 'div的高度是：' + $('#div1').height()+'px'; */
+
+                //innerWidth()innerHeight(),获取元素的宽高(包括内边距)
+                /* txt = txt + 'div的宽度是：' + $('#div1').innerWidth()+'px'+'</br>';
+                txt = txt + 'div的高度是：' + $('#div1').innerHeight()+'px'; */
+
+                //outerWidth()outerHeight(),获取元素的宽高(包括内边距)
+                txt = txt + 'div的宽度是：' + $('#div1').outerWidth()+'px'+'</br>';
+                txt = txt + 'div的高度是：' + $('#div1').outerHeight()+'px';
+                $('#div1').html(txt)
+            })
+        })
+    </script>
+</body>
+</html>

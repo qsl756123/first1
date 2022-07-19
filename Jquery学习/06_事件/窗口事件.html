@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <p>窗口重置了 <b>0</b> 次大小。</p>
+    <p>尝试重置窗口大小。</p>
+    <p>尝试滚动 div 中的滚动条</p>
+    <div style="border:1px solid black;width:200px;height:100px;overflow:scroll;">菜鸟教程 —— 学的不仅是技术，更是梦想！菜鸟教程 —— 学的不仅是技术，更是梦想！
+    <br><br>
+    菜鸟教程 —— 学的不仅是技术，更是梦想！菜鸟教程 —— 学的不仅是技术，更是梦想！</div>
+    <p>滚动了 <span>0</span> 次。</p>
+    <script>
+        x=0;
+        a=0;
+        $(function(){
+            $(window).resize(function(){
+                $("b").text(a+=1);
+            });
+            //监听滚动事件scroll
+            $("div").scroll(function(){
+                $("span").text(x+=1);
+            });
+        });
+    </script>
+</body>
+</html>

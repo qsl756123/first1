@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>祖先元素</h1>
+    <div style="height:100px;display: inline-block;line-height: 100px;">
+        <span id="spn">给我的父元素加个边框</span>
+    </div><br>
+    <button id="btn">通过parent()给span的父元素加个边框</button>
+    <br><br>
+    <div>
+        <ul>
+            <li>
+                <span id="spn1">给我所有祖先元素加个边框</span>
+            </li>
+        </ul>
+    </div>
+    <button id="btn1">通过parents()给span指定的祖先元素加个边框</button>
+    <button id="btn2">通过parents()给span指定元素的中间祖先元素加个边框</button>
+    <br><br><hr>
+    <h1>后代元素</h1>
+    <div id="div1">
+        <span>给我加个边框</span>
+        <span class="2">给我加个边框</span>
+        <span>给我加个边框</span>
+    </div><br>
+    <button id="btn3">通过children()给指定元素后代元素加个边框</button>
+    <button id="btn4">给指定元素并注明参数的后代元素加个边框</button>
+    <br><br>
+    <div id="div2">
+        <span>1</span>
+        <ul>
+            <span>2</span>
+            <li>
+                <span>3</span>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <button id="btn5">通过find()获取指定后代元素</button>
+    <button id="btn6">通过find('*')获取所有后代元素</button>
+    <br><br><hr>
+    <h1>同胞元素</h1>
+    <div>
+        <span>span</span>
+        <p id="p1">p</p>
+        <h3>h3</h3>
+        <span>span1</span>
+        <h2>h2</h2>
+        <span>span2</span>
+    </div>
+    <br>
+    <button id="btn7">通过siblings()获取指定元素的所有同胞元素</button>
+    <button id="btn8">通过siblings()获取指定元素的所有同胞span元素</button>
+    <button id="btn9">通过next()获取指定元素的下一个同胞元素</button>
+    <button id="btn10">通过nextAll()获取指定元素的后面所有同胞元素</button>
+    <button id="btn11">通过nextUntil()获取指定元素到参数元素中的所有同胞元素</button>
+    <script>
+        $(function(){
+            /* 祖先元素 */
+            //parent()选中父元素
+            $('#btn').click(function(){
+                $('#spn').parent().css('border','2px solid red')
+            })
+
+            //parents()无值则选中全部祖先元素，有值则指定元素
+            $('#btn1').click(function(){
+                $('#spn1').parents('div,ul').css('border','2px solid red')
+            })
+
+            //parentsUntil()选中介于两个给定元素之间的所有祖先元素
+            $('#btn2').click(function(){
+                $('#spn1').parentsUntil('div').css('border','2px solid red')
+            })
+
+            /* 后代元素 */
+            //children()选中指定元素的后代元素，无参默认全部
+            $('#btn3').click(function(){
+                $('#div1').children().css('border','2px solid red')
+            })
+            //children()选中指定元素的后代元素，无参默认全部
+            $('#btn4').click(function(){
+                $('#div1').children('span.2').css('border','2px solid red')
+            })
+
+            //find()获取后代元素
+            $('#btn5').click(function(){
+                $('#div2').find('span').css('border','2px solid red')
+            })
+            //通过find('*')获取所有后代元素
+            $('#btn6').click(function(){
+                $('#div2').find('*').css('border','2px solid red')
+            })
+
+            /* 同胞元素 */
+            //通过siblings()获取指定元素的所有同胞元素
+            $('#btn7').click(function(){
+                $('#p1').siblings().css('border','2px solid red')
+            })
+            //通过siblings()获取指定元素的所有span元素
+            $('#btn8').click(function(){
+                $('#p1').siblings('span').css('border','2px solid red')
+            })
+            //通过next()获取指定元素的下一个同胞元素
+            $('#btn9').click(function(){
+                $('#p1').next().css('border','2px solid red')
+            })
+            //通过nextAll()获取指定元素的后面所有同胞元素
+            $('#btn10').click(function(){
+                $('#p1').nextAll().css('border','2px solid red')
+            })
+            //通过nextUntil()获取指定元素到参数元素中的所有同胞元素
+            $('#btn11').click(function(){
+                $('#p1').nextUntil('h2').css('border','2px solid red')
+            })
+        })
+    </script>
+</body>
+</html>

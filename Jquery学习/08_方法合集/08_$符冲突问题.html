@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <p>我是p标签</p>
+    <button>点我</button>
+    <script>
+        /* 当我们jquery中的$符，遇到其他框架中也存在$符时就可能引起冲突 */
+        //noConflict()可以解决这个问题
+        /* $.noConflict();
+        jQuery(function(){
+            jQuery('button').click(function(){
+                jQuery('p').text('jQuery仍在工作')
+            })
+        }) */
+        //这样写jQuery麻烦就先给$赋值
+       /*  var j = $.noConflict();
+        j(function(){
+            j('button').click(function(){
+                j('p').text('jQuery仍在工作')
+            })
+        }) */
+        //也可以
+        $.noConflict();
+        jQuery(document).ready(function($){
+            $('button').click(function(){
+                $('p').text('jQuery仍在工作')
+            })
+        })
+    </script>
+</body>
+</html>

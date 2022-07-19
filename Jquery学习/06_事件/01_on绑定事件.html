@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="mydiv">我是一个div，需要一个button</div><br>
+    <input type="button" value="创建一个button，绑定一个click" id="btn1">
+    <script>
+        $(function(){
+            $('#btn1').click(function(){
+                //使用append给div添加dom对象
+                $('#mydiv').append('<input type="button" id="newbtn" value="我是新增的button"/>')
+                //使用on给按钮绑定事件
+                $('#newbtn').on("click",function(){
+                    var obj = $('#newbtn');
+                    alert($(obj).val());
+                })
+            })
+        })
+    </script>
+</body>
+</html>

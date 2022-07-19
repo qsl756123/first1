@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>dom与jquery转换</title>
+</head>
+<body>
+    <input type="button" id="btn" value="我是按钮" onclick="btnClick()">
+    <hr/>
+    <div>
+        <input type="button" value="计算平方" onclick="btnClick1()">
+        <input type="text" id="txt" value="1">
+    </div>
+    <script>
+        function btnClick(){
+            //使用dom的value属性获取值
+            var obj = document.getElementById('btn');
+            alert('使用dom对象的属性='+obj.value)
+
+            //使用dom对象转jquery，使用jQuery库中的函数
+            var jobj = $(obj);
+            alert('使用dom对象的属性='+jobj.val());
+        }
+
+
+        function btnClick1(){
+            //使用jquery的语法，获取页面的dom对象
+            var obj1 = $('#txt')[0];
+            //alert(obj1.value)
+            var num = obj1.value;
+            obj1.value = num*num;
+        }
+    </script>
+</body>
+</html>

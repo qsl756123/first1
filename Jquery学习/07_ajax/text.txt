@@ -1,0 +1,2 @@
+我是来配合jquery来学习ajax的
+<p id='p1'><span>你好</span></p>

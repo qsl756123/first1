@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        .div1{
+            width: 100px;
+            background-color: blue;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div>我是div0，给我添加点样式</div>
+    <div>我是div1，给我添加点样式</div>
+    <div>我是div2，给我添加点样式</div>
+    <div>我是div3，给我添加点样式</div>
+    <div>我是div4，给我添加点样式</div>
+    <button id="btn">添加css样式</button>
+    <button id="btn1">添加class属性</button>
+    <button id="btn2">删除class属性</button>
+    <script>
+        $(function(){
+            //css()添加样式,通过css添加的样式为内联样式，优先级较高
+            $('#btn').click(function(){
+                $('div').css('background','yellow')
+            })
+            //addClass()添加class属性
+            $('#btn1').click(function(){
+                //给div0添加样式 first（第一个）
+                $('div:first').addClass('div1');
+                //给页面中最后一个div添加样式
+                $('div:last').addClass('div1');
+                //根据下标添加样式
+                $('div:eq(2)').addClass('div1');
+            })
+            //removeClass()删除指定的class 属性
+            $('#btn2').click(function(){
+                //给div0添加样式 first（第一个）
+                $('div:first').removeClass('div1');
+                //给页面中最后一个div添加样式
+                $('div:last').removeClass('div1');
+                //根据下标添加样式
+                $('div:eq(2)').removeClass('div1');
+            })
+        })
+    </script>
+</body>
+</html>

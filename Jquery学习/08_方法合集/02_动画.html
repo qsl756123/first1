@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style type="text/css"> 
+    </style>
+</head>
+<body>
+    <button id="btn1">开始动画</button>
+    <button id="btn2">停止动画</button>
+    <p>默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 
+    如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</p>
+    <div style="background:#98bf21;height:100px;width:100px;position:absolute;">
+    </div>
+    <script>
+        $(function(){
+            //animate创建自定义动画
+            $("#btn1").click(function(){
+                /* $("div").animate({left:'250px'}); */
+
+                //animate() - 操作多个属性
+                /* $("div").animate({
+                    left:'250px',
+                    opacity:'0.5',
+                    height:'150px',
+                    width:'150px'
+                }); */
+
+                //animate() - 使用相对值
+                /* $("div").animate({
+                    left:'250px',
+                    height:'+=150px',
+                    width:'+=150px'
+                }); */
+
+                //animate() - 使用预定义的值
+                /* $("div").animate({
+                    height:'toggle'
+                });  */
+
+                //animate() - 使用队列功能
+                var div=$("div");
+                div.animate({height:'300px',opacity:'0.4'},"slow");
+                div.animate({width:'300px',opacity:'0.8'},"slow");
+                div.animate({height:'100px',opacity:'0.4'},"slow");
+                div.animate({width:'100px',opacity:'0.8'},"slow");
+            });
+            //stop() 方法适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画。
+            $("#btn2").click(function(){
+                $("div").stop();
+            });
+            
+        })
+    </script>
+</body>
+</html>

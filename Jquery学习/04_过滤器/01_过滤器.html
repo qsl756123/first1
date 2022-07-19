@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        .Div1{
+            width:100px;
+            height: 100px;
+            background:blue;
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <input type="button" value="第一个" onclick="fun1()">
+    <input type="button" value="最后一个" onclick="fun2()">
+    <input type="button" value="通过下标选择第三个" onclick="fun3()">
+    <input type="button" value="获取小于=4下标的所有对象" onclick="fun4()">
+    <input type="button" value="获取大于3下标的所有对象" onclick="fun5()">
+    <script>
+        function fun1(){
+            var obj = $('div:first')
+            obj.addClass('Div1')
+        }
+
+        function fun2(){
+            var obj = $('div:last')
+            obj.addClass('Div1')
+        }
+
+        function fun3(){
+            var obj = $('div:eq(2)')
+            obj.addClass('Div1')
+        }
+
+        function fun4(){
+            var obj = $('div:lt(4)')
+            obj.addClass('Div1')
+        }
+
+        function fun5(){
+            var obj = $('div:gt(3)')
+            obj.addClass('Div1')
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+    <style>
+        .Div1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>双击我</div><br><br>
+
+    <p>移入移出我都有变化</p><br><br>
+
+    <span>放在上面</span>
+    <script>
+        $(function(){
+            //dblclick双击触发
+            $('div').on('dblclick',function(){
+                $('div').addClass('Div1')
+            })
+
+            //mouseenter移入  mouseleave移出事件
+            $('p').mouseenter(function(){
+                $('p').css('background','blue')
+            })
+            $('p').mouseleave(function(){
+                $('p').css('background','yellow')
+            })
+
+            //hover悬停事件
+            $("span").hover(function(){
+                $("span").css("background-color","yellow");
+            },function(){
+                $("span").css("background-color","white");
+            });
+        })
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt1" value="text1"><br><br>
+    <input type="text" id="txt2" value="text2" disabled><br><br>
+    <input type="text" id="txt3" value="text3"><br><br>
+    <input type="text" id="txt4" value="text4" disabled><br><br>
+
+    <input type="checkbox" value="游泳">游泳
+    <input type="checkbox" value="健身" checked>健身
+    <input type="checkbox" value="吃喝" checked>吃喝<br><br>
+
+    <select id="yuyan">
+        <option value="java">java语言</option>
+        <option value="c#" selected>c#语言</option>
+        <option value="go">go语言</option>
+    </select>
+    <p>功能按钮</p>
+    <button id="btn1">所有可用的text设置hello</button><br><br>
+    <button id="btn2">显示被选中的复选框的值</button><br><br>
+    <button id="btn3">显示下拉列表选中的值</button><br><br>
+    <script>
+        $(function(){
+            //所有可用的text设置hello
+            $('#btn1').click(function(){
+                var obj = $(':text:enabled');
+                obj.val('hello');
+            })
+            //显示被选中的复选框的值
+            $('#btn2').click(function(){
+                var obj = $(':checkbox:checked');
+                for (let i = 0; i < obj.length; i++) {
+                    //alert(obj[i].value) 
+                    alert($(obj[i]).val())
+                }
+            })
+            //显示下拉列表选中的值
+            $('#btn3').click(function(){
+                var obj = $('#yuyan>option:selected');
+                alert(obj.val());
+            })
+        })
+    </script>
+</body>
+</html>
