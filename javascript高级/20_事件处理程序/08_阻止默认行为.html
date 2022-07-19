@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="03_EventUilt.js"></script>
+</head>
+<body>
+    <input type="text" id="text">
+    <div id="tip"></div>
+    <script>
+        var oText = document.querySelector('#text');
+        var oTip = document.querySelector('#tip');
+        /* oText.addEventListener('keypress',function(){
+            //不同浏览器的兼容键盘码的获取方式
+            var charcode = event.keyCode || event.which || event.charCode;
+            console.log(charcode);
+        })   */
+        //兼容IE8
+        EventUtil.addEventHandler(oText,'keypress',function(){
+            var charcode = event.keyCode || event.which || event.charCode;
+            //console.log(charcode);
+            var shuzi = charcode>=48 && charcode<=57;
+            var lower = charcode>=97 && charcode<122;
+            var upper = charcode>=65 && charcode<=90;
+            if(!shuzi && !lower && !upper){
+                //禁止用户输入
+                event.preventDefault();
+                oTip.innerText = '禁止输入除数字字母外的特殊字符';
+            }else{
+                
+            }
+            setTimeout(function(){
+                oTip.innerText = '';
+            },2000)
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>总结：<br>
+        闭包如果使用合理，在一定程度上能够提高代码的执行效率，如果使用不合理，则会造成内存浪费，性能下降，
+            接下来我们总结一下闭包的优缺点。
+    </p><br><hr>
+    <p>闭包的优点：</p>
+    <p>1、保护函数内变量的安全，实现封装，防止变量流入环境发生命名冲突，造成环境污染</p>
+    <p>2、在适当的时候，可以在内存中维护变量并缓存，提高效率</p>
+    <br><hr>
+    <p>闭包的缺点：</p>
+    <p>
+        1、消耗内存，函数的活动对象会随着执行的上下文环境一起被销毁，但是由于闭包引用的时外部函数的活动对象，<br>
+        因此这个活动对象无法被销毁，这就意味着闭包比普通函数要销毁更多的内存
+    </p>
+    <p>2、内存泄漏，在IE9之前，如果闭包的作用域链中存在DON对象，则意味着该DOM对象无法被销毁，造成内存泄露</p>
+    <script>
+        //闭包的例子
+        /* 在JavaScript中存在一种内部函数, 即函数声明和函数表达式可以位于另一个函数的函数体内，在内部函数中
+            可以访问外部函数声明的变量，当这个内部函数在包含它们的外部函数之外被调用时，就会形成闭包。
+        */
+        /* function fn(){
+            var max = 10;
+            return function bar(x){
+                if(x>max){
+                    console.log(x);
+                }
+            }
+        }
+        var f1 = fn();
+        //console.log(f1);
+        f1(11) */
+
+        //实例：当一个结果需要很长一段时间的耗时操作，
+        //      就可以利用闭包原理对结果缓存
+        var cacheMemory = (function(){
+            //定义一个缓存的容器
+            var cache = {};
+            console.log(cache)
+            return{
+                set:function(id){
+                    //如果在内存中就返回
+                    if(id in cache){
+                        return '查找的结果是id:'+cache[id];
+                    }
+                    //如果没在内存中就查询
+                    var result = fn1(id);
+                    cache[id] = result;
+                    //返回的的cacheid
+                    return '查找的结果是id:'+cache[id];
+                }
+            }
+        })();
+        function fn1(id){
+            console.log('很耗时的数据库操作！');
+            return id;
+        }
+        console.log(cacheMemory.set(1));
+        //再查id1时就不会再进入fn1,直接显示查询结果
+        console.log(cacheMemory.set(1));
+        console.log(cacheMemory.set(2));
+        console.log(cacheMemory.set(2));
+        console.log(cacheMemory.set(1));
+        //闭包最大的缺点，导致数据一直增长，所以前面要做清除操作
+
+        console.log('-----------------------------------')
+
+        var Stack = (function(){
+            //使用数组模拟栈
+            var stack = [];
+            return{
+                push:function(value){
+                    stack.push(value);
+                },
+                pop:function(){
+                    return stack.pop();
+                },
+                size:function(){
+                    return stack.length;
+                }
+            }
+        })();
+        Stack.push('abc');
+        Stack.push('abc1');
+        console.log(Stack.size());
+        console.log(Stack.pop());
+
+        console.log('-----------------------------------');
+
+        //利用ES6语法处理ES5定时器的问题
+        /* var arr = ['one','two','three'];
+        for (let i = 0; i < arr.length; i++) {
+            //var有穿透问题，所以下方会一直打印undefined
+            //解决办法利用ES6语法，讲上方var换成let
+            setTimeout(function(){
+                console.log(arr[i]);
+            },i*1000)
+        } */
+
+        //利用闭包处理ES5定时器的问题
+        /* var arr = ['one','two','three'];
+        for (var i = 0; i < arr.length; i++) {
+            (function(time){
+                setTimeout(function(){
+                    console.log(arr[time]);
+                },time*1000)
+            })(i)
+        } */
+
+        console.log('-----------------------------------');
+
+        //闭包会导致作用域链问题
+        var name = 'xiaoqiao';
+        var obj = {
+            name:'xiaoqing',
+            method:function(){
+                var _this = this;
+                return function(){
+                    return _this.name;
+                }
+            }
+        }
+        console.log(obj.method()());//xiaoqing
+    </script>
+</body>
+</html>

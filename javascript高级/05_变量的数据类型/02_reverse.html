@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 将字符串变成数组（法1） */
+        /* var str = 'asscdvaawafsd';
+        function reverseString(str){
+            //split('')将字符串变成数组
+            console.log(str.split(''));
+            //reverse()反转
+            console.log(str.split('').reverse());
+            //将数组转换为字符串
+            console.log(str.split('').reverse().join(''));
+            //return str.split('').reverse().join('');
+        }
+        reverseString(str); */
+
+        /* 将字符串变成数组（法2） */
+        //栈
+        function Stack() {
+            this.data = []; //保存栈内的元素
+            this.top = 0; //记录栈顶的位置
+        }
+        //在栈的原型链上添加方法
+        Stack.prototype = {
+            //入栈，现在的栈顶加入元素 元素的个数改变
+            push:function push(element){
+                this.data[this.top++] = element;
+            },
+            //出栈，先返回栈顶的元素 元素的个数减一
+            pop:function(){
+                return this.data[--this.top];
+            },
+            //返回栈内的元素长度
+            length:function(){
+                this.top;
+            }
+        }
+        //然后通过自定的函数调用栈再实现输出
+        function reverseString2(str){
+            //new 常见一个stack的实例
+            var s = new Stack();
+            //将字符串转换成数组
+            var arr = str.split('');
+            //存储转换后的数据
+            var result = '';
+            //数组的长度
+            var len = arr.length;
+            //将元素压入栈内
+            for (var i = 1 ; i < len ; i++) {
+                s.push(arr[i]);
+            }
+            //将元素输出
+            for (var j = 1 ; j < len ; j++) {
+                result += s.pop(j);
+            }
+            return result;
+        }
+
+        var str = 'asscdvaawafsd';
+        console.log(reverseString2(str)); 
+    </script>
+</body>
+</html>

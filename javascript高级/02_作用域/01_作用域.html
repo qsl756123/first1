@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域</title>
+</head>
+<body> 
+    <button>测试1</button>
+    <button>测试2</button>
+    <button>测试3</button>
+    <script>
+        //🔺作用域是解决变量冲突的问题，将一些私有变量写入函数中
+        /* var a = 1;
+        function fun(){
+            var a = 2;
+            var b = 3;
+            console.log(a);
+            console.log(b);
+            function fun1(){
+                var a = 4;
+                var b = 5;
+                console.log(a);
+                console.log(b);
+            }
+            fun1();
+        }
+        fun();
+        console.log(a);
+        console.log(b);
+        上方输出结果为：
+        2
+        3
+        4
+        5
+        1
+        报错
+        */
+
+        /* function fun2(){
+            c = 6;//没有var声明直接复制的变量为全局变量，外层可以访问到
+            var d = 7;
+        }
+        fun2();
+        console.log(c);
+        console.log(d); 
+        上方输出结果为：
+        6
+        报错
+        */
+        
+        //🔺作用域是分层的，内层作用域可以访问外层作用域的变量，反之不行
+        /* var e = 8;
+        function fun3(){
+            var f = 9;
+            function fun4(){
+                console.log(e);
+                console.log(f);
+            }
+            fun4();
+        }
+        fun3();
+        上方输出结果为：
+        8
+        9
+         */
+
+         //🔺ES6语法形成了块级作用域，即：
+         {
+             var aa = 1
+             let bb = 2;             
+         }
+         console.log(aa);//输出1，ES5之前没有形成块级作用域
+         //console.log(bb);//报错，ES6语法形成了块级作用域（let const）
+
+         //一个ES语法的知识点
+         var cc = 3;
+         var cc = 4;
+         console.log(cc)//可以输出4
+         //let cc = 5;
+         //console.log(cc)//报错
+
+
+         //循环中绑定块级作用域
+         var btns = document.getElementsByTagName('button')
+        /*下方如果用var定义index，就会变成全局变量，
+        i循环永远是3，所以我们点击谁都会提示第4个*/
+         for (let index = 0; index < btns.length; index++) {
+             btns[index].onclick = function(){
+                 console.log('第'+(index+1)+'个')
+             }
+         }
+    </script>
+</body>
+</html>

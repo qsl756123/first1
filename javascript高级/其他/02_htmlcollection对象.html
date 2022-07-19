@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>这章没啥卵用</h1>
+    <div id="Div1">
+        <p>aaa</p>
+        <p>bbb</p>
+        <p>
+            <b>item()函数</b>
+            HTMLCollection对象可以调用Item)函数，通过序号来获取特定的某个节点，超过索引则返回"nul". <br>
+        </p><hr>
+        <p>
+            <b>namedlrem()函数</b><br>
+            namedlrem()函数用于返回-个节点，首先通过id属性去匹配，如果没有匹配到则使用name属性匹配，如果<br>
+            还没有匹配到则返回"null".当出现重复id或者name属性时， 只返回第一个匹配到的值。<br>
+        </p><hr>
+    </div>
+    <script>
+        var Div1 = document.getElementById('Div1').children;
+        var Div2 = document.getElementById('Div1').childNodes;
+        //alert(Div1);//object HTMLDivElement
+        //console.log(Div1);
+        console.log(Div1.item(0));//<p>aaa</p>
+        //console.log(Div2);
+    </script>
+</body>
+</html>

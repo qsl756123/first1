@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        var arr = [];
+        /* typeof主要针对基本数据类型 */
+        console.log(typeof arr);//object判断不出是否为数组
+
+        /* instanceof */
+        var arr = [];
+        console.log(arr instanceof Array);//true
+        //此方法也可以判断是否为对象
+        var arr = {};
+        console.log(arr instanceof Object);//true
+        //但是万物皆对象，此方法判断数组是否为对象依旧是true
+        var arr = [];
+        console.log(arr instanceof Object);//true
+
+        var arr = [];
+        function getDataType(ao){
+            if(ao instanceof Array){
+                return 'Array';
+            }else if(ao instanceof Object){
+                return 'Object';
+            }else{
+                return 'Data not is Array or Object';
+            }
+        }
+        console.log(getDataType(arr));
+
+        /* 通过Array.isArray判断变量是否为数组 */
+        var a = 'qweqwe';
+        var b = [1,2,3];
+        var c = new Array();
+        console.log(Array.isArray(a));//false
+        console.log(Array.isArray(b));//true
+        console.log(Array.isArray(c));//true
+    </script>
+
+</body>
+</html>

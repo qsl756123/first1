@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        1.事件处理程序过多导致页面交互事件过长。<br>
+        2.事件处理程序过多导致内存占用过多。<br>
+        那么遇到这个问题时有什么好的方法解决呢?答案就是利用事件委托。<br>
+        <b>事件委托机制</b><br>
+        事件委托机制的主要思想是将事件绑定到父元素上，然后利用事件冒泡原理，当事件进入冒泡阶段时,通过<br>
+        绑定在父元素上的事件对象判断当前事件流正在进行的元素，如果和期望的元素相同，则执行相应的事件代码。<br>
+    </p>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+    </ul>
+    <hr>
+    <div id="box">
+        <input type="button" id="add" value="添加">
+        <input type="button" id="remove" value="删除">
+        <input type="button" id="update" value="修改">
+        <input type="button" id="search" value="查找">
+    </div>
+    <script src="EventUilt.js"></script>
+    <script>
+        //普通的为每一个节点添加事件处理程序
+        /* var Oli = document.querySelectorAll('li');
+        for(var i = 0; i<Oli.length; i++){
+            Oli[i].onclick = function(){
+                console.log(this.innerText);
+            }
+        } */
+        //更加灵活的办法
+        //获取ul的父元素
+        var oUl = document.querySelector('ul');
+        oUl.addEventListener('click',function(event){
+            //获取事件对象
+            var event = EventUtil.getEvent(event);
+            //获取target
+            var target = EventUtil.getTarget(event);
+            //console.log(target);
+            //console.log(target.nodeName);
+            if(target.nodeName.toLowerCase() === 'li'){
+                console.log(target.innerText);
+            }
+        })
+        
+        var box = document.querySelector('#box');
+        /* var add = document.querySelector('#add');
+        var remove = document.querySelector('#remove');
+        var update = document.querySelector('#update');
+        var search = document.querySelector('#search'); */
+        box.addEventListener('click',function(event){
+            //获取事件对象
+            var event = EventUtil.getEvent(event);
+            //获取target
+            var target = EventUtil.getTarget(event);
+            switch(target.id){
+                case 'add':
+                    //add();//这里就可以自行添加一些想要操作
+                break;
+                case 'remove':
+                    //remove();
+                break;
+                case 'update':
+                    //update();
+                break;
+                case 'search':
+                    //search();
+                break;
+            }
+        })
+    </script>
+</body>
+</html>

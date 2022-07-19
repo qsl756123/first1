@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 1-100的和 */
+        /* //假设递归已经写好了
+        sum(100);
+        //寻找递归体的关系
+        sum(n)+sum(n-1)+sum(n-1);
+        //判断临界条件 终止条件
+        n == 1 return 1
+        //将临界条件加入递归体中 */
+         function Sum(n){
+             if(n == 1) return 1;
+             return Sum(n-1)+n;
+         }
+         console.log(Sum(100));
+
+
+        /*奇数的和 */
+        function Sum1(a){
+            if( a%2 == 0){
+                a--;
+            }
+            if(a == 1){
+                return 1;  
+            }else{
+                return a + Sum1(a - 2);
+            }
+        }
+        var sum1 = Sum1(20);
+        console.log('20以内的奇数和 == ' + sum1);
+
+
+        /* 斐波那契数列的第n项 */
+        /* fib(b);
+        //递归关系
+        b = fib(b-1)+fib(b-2);
+        //临界条件
+        if(b == 0) return 1;
+        if(b == 1) return 1;
+        //将临界条件加入递归体中 */
+        function fib(b){
+            if(b == 0 || b == 1) return 1;
+            return fib(b-1)+fib(b-2);
+        }
+        console.log(fib(5));
+
+
+        /* 阶乘 */
+        /* //假设写好了
+        factorial(4);
+        //递归关系
+        factorial(c)*factorial(c-1)*c;
+        //临界条件
+        if(c == 1) return 1;
+        //将临界条件加入递归体中 */
+        function factorial(c){
+            if(c==1) return 1;
+            return factorial(c-1)*c;
+        }
+        console.log(factorial(10));
+
+
+        /* 求幂 */
+        /* //假设写好了
+        power(d,e);
+        //递归关系
+        power(d,e-1)*d;
+        //临界条件
+        if(e == 0) return 1;
+        //将临界条件加入递归体中 */
+        function power(d,e){
+            if(e == 0) return 1;
+            return power(d,e-1)*d;
+        }
+        console.log(power(2,4));
+
+        /* //假设写好了
+        reverseString(str);
+        //递归关系
+        //charAt()返回的是具体的字符串
+        sortReverse = reverseString.charAt(str.lenght--);
+        //终止条件
+        (str.lenght -- < 0);
+        //将临界条件加入递归体中 */
+        function reverseString(str,len,strOut){
+            //终止条件
+            if(len<0){
+                return strOut;
+            }
+            strOut += str.charAt(len--);
+            //这里的len幼=要是函数内部的数据变换的
+            return reverseString(str,len,strOut);
+        }
+        var str = 'abcdefg';
+        reverseString(str,str.length-1,result);
+        var result = '';
+        console.log(reverseString(str,str.length-1,result));
+    </script>
+</body>
+</html>

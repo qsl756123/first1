@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <b>构造继承：</b><br>
+        构造继承的主要思想是在子类的构造函数中通过all0函数改变this的指向，调用父类的构造函数，从而能将父<br>
+        类的实例的属性和函数绑定到子类的this上。<br>
+        通过代码可以发现，子类可以正常调用父类的实例函数,而无法调用父类原型对象上的函数，这是因为子类并没<br>
+        有通过某种方式来调用父类原型对象上的函数。
+    </p><br><hr>
+    <p>
+        <b>构造继承的优点：</b><br>
+        1.可解决子类实例共享父类属性的问题。<br>
+            cal()函数实际是改变了父类Animal构造函数中this的指向，调用后this指向了子类Cat,相当于父类的type,<br>
+            age和slee等属性和函数直接绑定到了子类的this中,成了子类实例的属性和函数，因此生成的子类实例中是<br>
+            各自拥有自己的type, age和sleep属性和函数, 不会互相影响。<br>
+        2.创建子类的实例时，可以向父类传递参数<br>
+            在call()函数中，我们可以传递参数,这是时候参数是传递给父类的，我们就可以对父类的属性进行设置,同<br>
+            时由子类继承下来。
+    </p>
+    <p>
+        <b>构造继承的缺点：</b><br>
+        1.实例只是子类的实例，并不是父类的实例。<br>
+            因为我们并没有通过原型对象将子类与父类进行串联，所以生成的实例与父类并没有关系，这样就失去了继承<br>
+            的意义。<br>
+        2.只能继承父类实例的属性和函数，并不能继承原型对象上的属性和函数。<br>
+            与缺点1相同，子类的实例并不能访问到父类原型对象上的属性和函数。<br>
+        3.无法复用父类的实例函数<br>
+            由于父类的实例函数将通过all0函数绑定到子类的this中,因此子类生成的每个实例都会拥有父类实例函数的<br>
+            引用，这会造成不必要的内存消耗，影响性能。
+            
+    </p>
+    <script>
+        //父类
+        function Animal(name,age){
+            this.name = name;
+            this.age = age;
+            this.sleep = function(){
+                console.log(this.name+'正在睡觉');
+            }
+        }
+        //父类2，构造继承可以实现多继承
+        function Animal2(sex){
+            this.sex = sex;
+        }
+        //在父类的原型上增加方法
+        Animal.prototype.eat = function(food){
+            console.log(this.name+'正在吃'+food);
+        }
+        //子类
+        function Cat(name,age,sex){
+            //继承
+            Animal.call(this);
+            Animal2.call(this);
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        var cat = new Cat('Tom',18,'公');
+        console.log(cat.name);//Tom
+        console.log(cat.age);//18
+        console.log(cat.sex);//男
+        cat.sleep();//改变this的指向只能使用自身的属性
+        //cat.eat(); 原型链上的自身的属性和原型链的属性都可以使用
+        /* 但是构造继承只是改变了this指向，并没有做到真正的继承 */
+        console.log(cat instanceof Cat);//true
+        console.log(cat instanceof Animal);//false
+    </script>
+</body>
+</html>

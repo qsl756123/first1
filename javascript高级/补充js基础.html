@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* for in 遍历 */
+        var str = {
+			name: '李刚',
+			age: 15,
+			sex: '男'
+        }
+        
+        for (k in str) {
+        
+            //k是变量，输出的是对象的属性名
+            //console.log(k);
+        
+            //str[k]得到的是属性值
+            console.log(str[k]);
+        
+            //console.log('------');
+            console.log(this.in)
+        }
+
+        var arr = [1,'你好','随时',12]
+        console.log(a);//undefined
+        for (var a in arr) {
+            console.log(arr[a])
+        }
+    </script>
+</body>
+</html>

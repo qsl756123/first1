@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4,5,6,7,8,9];
+        //arr.min();直接用会报错
+        //先在原型链上绑定min方法,获取最小值
+        Array.prototype.min = function(){
+            var min = this[0];
+            var len = this.length;
+            for(var i = 0; i < len; i++){
+                if(this[i]<min){
+                    min = this[i];
+                }
+            }
+            return min
+        }
+        console.log(arr.min());//1
+
+        //先在原型链上绑定max方法,获取最大值
+        Array.prototype.max = function(){
+            var max = this[0];
+            var len = this.length;
+            for(var i = 0; i < len; i++){
+                if(this[i]>max){
+                    max = this[i];
+                }
+            }
+            return max
+        }
+        console.log(arr.max());//9
+
+        /* 通过math比较数组中数据大小 */
+        //js Math.min/max是math对象本身就存在的
+        console.log(Math.min(1,4))//1
+        console.log(Math.max(1,4))//4
+        /* apply(,[])改变执行主体，就是用apply方法
+        call(,)不是数组的时候就要call方法 */
+        Array.min = function(){
+            return Math.min.apply(Math,arr);
+        }
+        console.log(Array.min(arr));//1
+        Array.max = function(){
+            return Math.max.apply(Math,arr);
+        }
+        console.log(Array.max(arr));//9
+
+        /* 链式调用 */
+        Array.prototype.min = function(){
+            return Math.min.apply(Math,this);
+        }
+        Array.prototype.max = function(){
+            return Math.max.apply(Math,this);
+        }
+        console.log(arr.min());//1
+        console.log(arr.max());//9
+    </script>
+</body>
+</html>

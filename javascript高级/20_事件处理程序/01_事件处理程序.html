@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <b>事件处理程序：</b>
+        根据W3C DOM标准，事件处理程序分为DOMO、DOM2. DOM3这3种级别的事件处理程序，由于在DOM1 <br>
+        中并没有定义事件的相关内容，因此没有所谓的DOM1级事件处理程序。<br>
+    </p>
+
+    <div id="ad">
+        aaa
+    </div>
+    <script>
+        //Dom0级事件处理程序 会属性覆盖
+        var ad = document.querySelector('#ad');
+        /* ad.onclick = function(){
+            console.log(1);
+        }
+        ad.onclick = function(){
+            console.log(2);
+        } */
+        //Dom2级事件处理程序 可以区分冒泡捕获 不会属性覆盖
+        /* ad.addEventListener('click',function(){
+            console.log(1);
+        })
+        ad.addEventListener('click',function(){
+            console.log(2);
+        }) */
+        //兼容IE8 但是是从后往前执行
+        /* ad.attachEvent('onclick',function(){
+            console.log(1);
+        })
+        ad.attachEvent('onclick',function(){
+            console.log(2);
+        }) */
+    </script>  
+</body>
+</html>

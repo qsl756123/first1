@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        myAddall()函数自身是不具备运算能力的，但是我们在myAddCall()函数中, 通过调用add()函数的call())函<br>
+            数，并传入this值, 将执行add()函数主体改变为myaddall()函数自身，然后传入参数x, y这就使得<br>
+            myAddCall()函数拥有add()函数计算求和的能力，在实际计算时就是1+2=3.
+    </p>
+    <script>
+        //定义一个add函数
+        function add(num,num1){
+            console.log(num+num1);
+        }
+        //console.log(add(1,2));
+        //定义myAddCall()函数
+        function myAddCall(x,y){
+            //绑定add()函数 使用的单个的值
+            return add.call(this,x,y)
+        }
+        myAddCall(1,2)
+    </script>
+</body>
+</html>

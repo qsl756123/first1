@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1、需要提前获取返回值的时候，就使用函数声明，因为它可以进行函数提升
+        2、如果是普通的函数，不用返回值，使用声明函数或表达式函数都可以
+        3、封装的类库，应该包裹在{} 它才会形成自己的作用域不会和其他的库和其他人的代码冲突
+        4、变量提升是bug 函数提升解决的是循环调用 递归问题
+     -->
+    <script>
+        /* 函数声明之前调用函数，就是函数提升 */
+        fun();//不管我们把函数调用放在前还是后，预编译时都会放到函数后面
+        function fun() {
+            console.log(11);//11
+            fun1();//函数提示是必要的而且是js规定好的，变量提升是js语言的问题，或是开发人员不遵守规则导致的
+            function fun1(){
+                console.log(22);//22
+            }
+        }
+
+        /* 如果函数中存在多个同名函数声明，后面的会覆盖掉前面的 */
+        function fun2(){
+            function fun3(){
+                console.log(33);
+            }
+            fun3();
+            function fun3(){
+                console.log(44);
+            }
+        }
+        fun2();//44
+
+
+        /* 函数表达式不能进行函数提升 */
+        //fun4();//报错
+        var fun4 = function(){
+            console.log(55);
+        }
+        
+
+        //当函数和变量重名时
+        function fun5(){
+            console.log(foo);
+            foo = 5;
+            console.log(foo);
+            function foo() {}
+        }
+        fun5();
+        //上方预编译后
+        function fun6() {
+            var foo;
+            foo = function foo() {};
+            console.log(foo)//function foo() {}
+            foo = 5;
+            console.log(foo)//5
+        }
+        fun6()
+
+        //函数提升是为了解决"递归调用"的问题
+        //验证偶数
+        function fun7(n){
+            if(n === 0){
+                return true;
+            }   
+            return fun8(n - 1);
+        }
+        function fun8(n){
+            if(n === 0){
+                return false;
+            }   
+            return fun7(n - 1);
+        }
+        console.log(fun7(2));//true
+    </script>
+</body>
+</html>

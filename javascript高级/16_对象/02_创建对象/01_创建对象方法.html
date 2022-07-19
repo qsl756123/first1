@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        在javascript中，对象是一系列无序属性的集合，属性值可以为基本数据类型<br>
+        对象或者函数，因此对象实际就是一组键值对的组合<br>
+    </p><br><hr>
+    <p>
+        方法1具有方法2在创建对象时都具有相同的优点，简单，容易理解，但是对象<br>
+        的属性值是通过对象自身进行设置的，如果需要同时创建若干个属性相同，而<br>
+        只是属性值不同的对象时，则会产生很多的重复代码,造成代码的冗余，因此<br>
+        不推荐使用方法1和方法2来批量创建对象.
+    </p><br><hr>
+    <p>
+        工厂方法模式：是一种比较重要的设计模式，用于创建对象，旨在抽象出创建对<br>
+        象和属性赋值的过程，值对外暴露出需要设置的属性值。<br>
+    </p>
+    <p>
+        构造函数：是通过this为对象添加属性的，属性值类型可以为基本类型，对象或<br>
+        者函数,然后通过new操作符创建对象的实例。<br>
+    </p><br><hr>
+    <p>
+        🔺构造函数和原型混合的模式：是目前最常见的创建自定义类型对象的方式。<br>
+        构造函数中用于定义实例的属性，原型对象中用于定义实例共享的属性和函数，通<br>
+        过构造函数传递参数，这样每个实例都能拥有自己的属性值，同时实例还能共享函<br>
+        数的引用，最大限度的节约了内存的空间，混合模式可谓集二者之所长。<br>
+    </p><br><hr>
+    <p>
+        动态原型模式：是将原型对象放在构造函数的内部，通过变量进行控制，只在第一次<br>
+        生成实例的时候进行原型的设置。<br>
+        动态原型的模式相当于懒汉模式，只在生成实例时设置原型对象，但是功能与构造<br>
+        函数和原型混合模式是相同的。
+
+    </p>
+    <script>
+        //1、普通对象创建方式：
+        var person = {
+            name : '小乔',
+            age : 18,
+            sayname(){
+                console.log(this.name);
+            },
+            address:{
+                name:'巴中',
+                code:'123'
+            }
+        }
+        console.log('-------------------------')
+
+        //2、构造对象方式：
+        //Object()构造函数生成实例
+        var person = new Object();
+        //为实例新增各种属性
+        person.name = '小乔';
+        person.getName = function(){
+            return this.name;
+        }
+        person.address = {
+            name:'巴中',
+            code:'123'
+        }
+        console.log('-------------------------')
+
+        //3、字面量方式
+        var person = {
+            //基本数据类型的属性
+            name:'小乔',
+            getName:function(){
+                return this.name;
+            }
+        }
+        console.log('-------------------------')
+
+        //4、工厂方式
+        function createPerson(name,age,address){
+            var o = new Object();
+            o.name = name;
+            o.age = age;
+            o.address = address;
+            o.getName = function(){
+                return this.name
+            }
+            return o;
+        }
+        var person = createPerson('小乔',18,{
+            name:'巴中',
+            code:'123'
+        });
+        var person1 = createPerson('小卿',18,{
+            name:'成都',
+            code:'123'
+        });
+        console.log(person);
+        console.log(person1);
+        console.log('-------------------------')
+
+        //5、构造函数创建对象
+        function Person(name,age,address){
+            this.name = name;
+            this.age = age;
+            this.address = address;
+            this.getName = function(){
+                return this.name;
+            }
+        }
+        var person = new Person('小刘',18,{
+            name:'俄罗斯',
+            code:'123'
+        });
+        var person2 = new Person('小望',18,{
+            name:'日本',
+            code:'123'
+        });
+        console.log(person);
+        //但是每次的内存地址都会新增，第6个方法解决
+        console.log(person.getName === person2.getName)//false
+        console.log('--------------------------');
+
+        //6、基于原型对象的模式创建对象
+        //定义函数
+        function Person1(){
+            Person1.prototype.name = '小放';
+            Person1.prototype.age = 18;
+            Person1.prototype.address = {
+                name:'德国',
+                code:'123123'
+            };
+            Person1.prototype.getName = function(){
+                return this.name;
+            }
+        }
+        var person = new Person1();
+        var person2 = new Person1();
+        console.log(person.getName === person2.getName);//true
+        //但是6也有一个问题，所有的实例都会共享相同的属性，
+        //改变其中一个属性值，便会引起其他属性值的变化
+        console.log('--------------------------');
+
+        //7、构造函数和原型混合的模式
+        //构造函数中添加实例
+        function Person3(name,age,address){
+            this.name = name;
+            this.age = age;
+            this.address = address;
+        }
+        //原型上添加共享属性
+        Person3.prototype.getName = function(){
+            return this.name;
+        }
+        var person4 = new Person3('小器',18,{
+            name:'俄罗斯',
+            code:'123'
+        });
+        var person5 = new Person3('小就',18,{
+            name:'日本',
+            code:'123'
+        });
+        console.log(person4.getName() === person5.getName());//fasle
+        console.log(person4.getName === person5.getName);//true
+        console.log('----------------------------');
+
+        //8、基于动态原型模式（7的优化）
+        function Person6(name,age,address){
+            this.name = name;
+            this.age = age;
+            this.address = address;
+            if(typeof Person6._initialized === 'undefined'){
+                Person6.prototype.getName = function(){
+                    return this.name;
+                }
+                Person6._initialized = true;
+            }
+        }
+        //生成实例
+        var person7 = new Person6('小柒',18,{
+            name:'俄罗斯',
+            code:'123'
+        });
+        var person8 = new Person6('小拔',18,{
+            name:'日本',
+            code:'123'
+        });
+        console.log(person7.getName());
+        console.log(person8.getName())
+        console.log(person7.getName === person8.getName);//true
+    </script>
+</body>
+</html>

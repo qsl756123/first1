@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>与call()函数类似，唯一的区别就是在传值上：<br>
+        call()传的是单个的值<br>
+        apply()传的是数值
+    </p>
+    <script>
+        //定义一个add函数
+        function add(num,num1){
+            console.log(num+num1);
+        }
+        //console.log(add(1,2));
+        //定义myAddApply()函数
+        function myAddApply(x,y){
+            //绑定add()函数 apply这里使用的是数组
+            return add.apply(this,[x,y])
+        }
+        myAddApply(1,2)
+    </script>
+</body>
+</html>

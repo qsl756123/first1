@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>
+        在JavaScript中,函数实际上也是一种对象, 每个函数都是Function类型的实例，能够定义不同类型的属性与<br>
+            方法。在使用函数之前，我们得先学会定义函数，函数的定义大体.上可以分为三种，分别是函数声明，<br>
+            函数表达式和Function构造函数。
+        <br><hr>
+        <p>使用new操作符 调用Function构造函数</p>
+            其中的参数，除了最后一个参数是执行的函数体,其他参数都是函数的形参。相比于前两种函数的声明的方<br>
+                式，构造方式申明函数用的会更少一些， 原因有以下两个原因。<br>
+            1. Function0构造函数在执行时，都会解析函数的执行主体,并创建一一个新的函数对象，所以当在一个循环或者<br>
+                频繁执行的函数中调用Function0构造函数时，效率时非常低的。<br>
+            2.在使用Function0构造函数创建的函数，并不遵循典型的作用域，它将一直作为顶级函数执行,所以在函数<br>
+                内部调用Function(构造函数时，其中的函数体并不能访问到函数A中的全局变量，而只能访问到全局变量。<br>
+        <br><hr>
+        <p>构造器调用模式</p>
+            构造器调用模式会定义-个函数，在函数中定义实例属性，在原型上定义函数，然后通过new操作符生成函<br>
+                数的实例，在通过实例调用原型上定义的函数。<br>
+    </span>
+    <script>
+        //自执行函数
+        var a = (function(){ console.log('我是自执行函数') }())
+        //函数声明
+        function fun(){
+            console.log('1');
+            return true;
+        }
+        fun();
+        //return返回值需要通过打印方式显示
+        console.log(fun());
+        
+        //函数表达式
+        var fun1 = function(){
+            console.log('1');
+        }
+        fun1();
+
+        //使用new操作符 调用Function构造函数
+        var add = new Function('num1','num2','return num1+num2');
+        console.log(add(2,3))
+
+        /* 非典型作用域（可以结合前面学习的典型作用域看看） */
+        var y = 'gladas';
+        function cnstruct(){
+            var y = '12qwe';
+            return new Function('return y');//将一直作为顶级函数执行,也就是全局
+        }
+        console.log(cnstruct()());//依旧输出gladas
+
+        /* 代码模块化
+        *   person 
+        *   getName 
+        *   setName newName 'string'
+        *   return name
+        */
+        var Person = (function(){
+            var _name = '';
+            return{
+                getName:function(){
+                    return _name;
+                },
+                setName:function(newName){
+                    _name = newName;
+                }
+            }
+        }());
+        Person.setName('小乔');
+        console.log(Person.getName());
+
+        console.log('-------------------------------------');
+
+        /* 函数的调用 */
+        //函数名调用
+        function num(){
+            console.log('我是通过函数名调用的');
+        }
+        num();
+        
+        //方法调用
+        var obj = {
+            name:'小乔',
+            getName:function(){
+                console.log(this.name);
+            },
+            setName:function(name){
+                this.name = name;
+                return this;
+            }
+        };
+        //下方两种调用方式自选
+        obj.getName();
+        obj['getName']();
+        obj.setName('小卿').getName();
+
+        console.log('-------------------------------------');
+        
+        //构造器调用模式
+        //定义函数对象
+        function Person1(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        //在现在的函数对象的原型上添加方法
+        Person1.prototype.getName = function(){
+            return this.name;
+        };
+        Person1.prototype.getAge = function(){
+            return this.age
+        }
+        //通过new操作符生成实例
+        var p = new Person1('小乔',22);
+        //通过实例进行函数的调用
+        console.log(p.getName(),p.getAge());
+
+        console.log('-------------------------------------');
+
+        //匿名函数调用
+        var a = function(){
+            console.log(1);
+        }
+        a();
+        (function(){
+            console.log(1);
+        }())
+    </script>
+</body>
+</html>

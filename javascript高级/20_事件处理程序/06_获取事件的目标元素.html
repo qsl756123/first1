@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="03_EventUilt.js"></script>
+</head>
+<body>
+    <p>
+        <b>获取事件的目标元素</b><br>
+        在事件处理程序中，我们可能经常需要获取事件的目标元素，以便对目标元素做相应的处理。<br>
+        在IE浏览器中，event对象使用srcElement属性来表示事件的目标元素，而在非IE浏览器中，event对象使用<br>
+        target属性来表示事件的目标元素，为了提供与IE浏览器下event对象相同的特性，某些非IE浏览器也支持<br>
+        srcElement, <br>
+        同理，我们在同一个事件处理程序中使用上述两种属性来获取事件的目标元素。
+    </p>
+    <button id="btn">单击</button>
+    <script>
+        /* var btn = document.getElementById('btn');
+        btn.addEventListener('click',function(event){
+            var ieEvent = event.srcElement;
+            var notIeEvent = event.target;
+            console.log(ieEvent);
+            console.log(notIeEvent);
+        }) */
+        var btn = document.getElementById('btn');
+        btn.addEventListener('click',function(event){
+            console.log(EventUtil.getEvent());
+            console.log(EventUtil.getTarget(event));
+        });
+    </script>
+</body>
+</html>

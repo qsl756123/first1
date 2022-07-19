@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <b>深入了解JavaScript中的new运算符</b>
+        Object类型是目前JavaScript中使用最多的一个类型，目前大家使用的大部分引用数据类型都是Object类型,<br>
+            Object类型的使用频率高是因为其对于数据存储和传输是非常理想的选择。由于引用数据类型的实例都需<br>
+            要通过new操作符来生成，因此我们需要了解new操作符的相关知识。<br>
+        new操作符在执行过程中会改变this的指向，所以了解new操作符之前.我们先了解一下this的用法。
+    </p>
+    <script>
+        /* function foo(p1,p2){
+            this.val = p1+p2;
+        }
+        var bar = foo.bind(null,'p1');
+        var baz = new bar('p2');
+        console.log(baz.val);//p1p2 */
+
+        function Cat(name,age){
+            //console.log(this);此时的this指向空的Cat对象
+            var Cat = {}; 
+            this.name = name;
+            this.age = age;
+            return Cat;
+        }
+        /* var cat = new Cat('miao',11);
+        console.log(cat); */
+        console.log(new Cat('miao',11));
+    </script>
+</body>
+</html>

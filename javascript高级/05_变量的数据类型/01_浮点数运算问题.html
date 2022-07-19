@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    console.log(0.1+0.2)//0.30000000000000004
+        /* 
+            产生问题的原因：
+            首先我们来看看一个浮点数在计算机中的表示方法，它的总共长度是64位，其中最高位为符号位，接下来得11
+                位是指数位，最后的52位是小数位，也就是有效的数字部分。
+            因为浮点数使用64位存储时，最多只能存储52的小数位,对于一些存在无限循环的小数位浮点数， 会截取前52
+                位，从而丢失精度，所以会出现上面例子中的效果。
+            根本原因：是因为小数转换成2进制数据存储到是计算机里时会产生循环问题，解决办法就是进行截取
+                截取之后的二进制数据进行相加后，在转化成十进制就变成了0.30000000000000004
+        */
+       /* 整数没有问题 */
+       console.log(1+2)//3
+    </script>
+</body>
+</html>

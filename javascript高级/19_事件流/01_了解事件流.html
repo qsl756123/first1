@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <b>事件流：</b><br>
+        这就会涉及事件流的概念，事件流描述的是从页面中接收事件的顺序。事件发生后会在目标节点和根节点之间按<br>
+        照特定的顺序传播、路径经过的节点都会接收到事件。我们通过下面的场景来直观地想象一下事件的流转顺序。<br>
+        <br>
+        第一种事件传递顺序是先触发最外层的table元素,然后向内传播，依次触发tbody. tr与td元素。<br>
+        第二种事件传递顺序是先触发最内层的td元素，然后向外传播，依次触发tr、tbody与table元素。<br>
+            第一种事件传递顺序对应的是捕获型事件流，第二种事件传递增序对应的是冒泡型事件流。<br>
+            一个完整的事件流实际包含了3个阶段:事件捕获阶段>事件目标阶段>事件冒泡阶段<br>
+            上述两种类型的事件流实际对应其中的事件捕获阶段与事件冒泡阶段。<br>
+    </p><hr>
+    <p>
+        <b>事件捕获阶段：</b><br>
+        事件捕获阶段的主要表现是不具体的节点先接收事件，然后逐级向下传播，最具体的节点最后接收到事件。
+    </p><hr>
+    <p>
+        <b>事件目标阶段：</b><br>
+        事件目标阶段表示事件刚好传到到用户产生行为元素上，可能是事件捕获的最后一阶段，也可能是事件冒泡的第一个阶段。<br>
+    </p><hr>
+    <p>
+        <b>事件冒泡阶段：</b><br>
+        事件冒泡阶段的主要表现是最具体的元素先接收事件,然后逐级向上传播，不具体的节点最后接收事件。<br>
+        为了更直观的了解捕获事件流和冒泡事件流，我们通过实际案例来进行分析。<br>
+    </p>
+    <table border='1'>
+        <tbody>
+            <tr>
+                <td>这是td元素</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var table = document.querySelector('table');
+        var tbody = document.querySelector('tbody');
+        var tr = document.querySelector('tr');
+        var td = document.querySelector('td');
+        //使用addEventListener)函数绑定的事件在默认情况下，即第三个参数默认为false时，按照泡型事件流处理。
+        table.addEventListener('click',function(){
+            console.log('table监听到了');
+        },true);//后面改true为事件捕获
+        tbody.addEventListener('click',function(){
+            console.log('tbody监听到了');
+        },true)
+        tr.addEventListener('click',function(){
+            console.log('tr监听到了');
+        },true)
+        td.addEventListener('click',function(){
+            console.log('td监听到了');
+        },true)
+    </script>
+</body>
+</html>

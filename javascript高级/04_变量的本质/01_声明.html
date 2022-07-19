@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //先声明再赋值
+        var a ;
+        a = 1;
+        alert(a);//1
+        a = 2;
+        alert(a);//2
+
+        let c ;
+        c = 4;
+        alert(c);
+        c = 5;
+        alert(c);
+
+        //直接赋值，const 不能单独声明，也不能修改值
+        const b = 3;
+        alert(b);//3
+        //b = 2;
+        //alert(b);//报错
+    </script>
+</body>
+</html>

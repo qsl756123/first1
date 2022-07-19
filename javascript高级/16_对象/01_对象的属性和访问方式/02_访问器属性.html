@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /* 访问器属性
+            [[configurable]]：是否可以通过delete删除
+            [[Enumerable]]：是否可以通过for-in循环返回
+            [[Get]]:获取函数，在读取属性时调用，默认值为undefined
+            [[Set]]:设置函数，在写入属性时调用，默认值为undefined  
+        访问器属性时不能直接定义的，必须使用Object.defineProperty().
+        */
+        //例子：
+        //定义一个对象，包含私有成员year_和公共成员
+        let book = {
+            year_:2022,
+            edition:1
+        };
+        Object.defineProperty(book,'year',{
+            get(){
+                return this.year_;
+            },
+            set(newValue){
+                if(newValue > 2022){
+                    this.year_ = newValue;
+                    this.edition += newValue - 2022;
+                }
+            }
+        });
+        book.year = 2222;
+        console.log(book.edition);
+    </script>
+</body>
+</html>

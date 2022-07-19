@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getMax(str){
+            //创建一个空对象
+            var json = {};
+            //循环遍历字体
+            for (let i = 0; i < str.length; i++) {
+                if(!json[str.charAt(i)]){
+                    //如果不存在 添加到json对象中
+                    json[str.charAt(i)] = 1;
+                }else{
+                    //如果存在 value+1
+                    json[str.charAt(i)]++;
+                }
+            }
+            //console.log(json)
+            //存储次数和具体的字母
+            var maxChar = '';
+            var maxNuma = 0;
+            //遍历json对象
+            for(var key in json){
+                if(json[key]>maxNuma){
+                    maxChar = key;
+                    maxNuma = json[key];//value
+                }
+            }
+            return '出现最多的值是：' + maxChar+'出现的次数为：'+ maxNuma;
+        }
+        var str = 'hellojavascripthellohtmlhellocss';
+        console.log(getMax(str));
+    </script>
+</body>
+</html>

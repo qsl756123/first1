@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    函数重载表示的是在函数名相同的情况下，通过函数形参的不同参数类型或者不同参数个数来定义不同的参<br>
+        数，但是JavaScript中是没有函数重载的，主要有以下几点原因导致avaScript没有函数重载:<br>
+        1.JavaScript是一门弱类型的语言，变量只有在使用时才能确定数据类型，通过形参是无法确定数据类型的。<br>
+        2.无法通过函数参数的个数来指定调用不同的函数，函数的参数的个数实际在函数调用时才确定下来的。<br>
+        3.使用函数声明定义具有相同名称的函数，后者会覆盖前者。<br>
+    
+    那么遇到这种情况我们就需要写一个通用的函数，来实现任意个数字相加的结果求和。首先通过Call()函数间<br>
+        接调用数组的slice()函数，以得到函数参数的数组。然后调用数组的reduce()函数进行多 个值的求和并返回。
+    <script>
+        /* function sum(num1,num2){
+            return num1+num2;
+        }
+        function sum(num1,num2,num3){
+            return num1+num2+num3;
+        }
+        console.log(sum(1,2,3)) */
+
+        //函数重载
+        function sum(){
+            var arr = Array.prototype.slice.call(arguments);
+            return arr.reduce(function(acc,cur){
+                return acc+cur;
+            },0)
+        }
+        console.log(sum(1,2,3))
+    </script>
+</body>
+</html>

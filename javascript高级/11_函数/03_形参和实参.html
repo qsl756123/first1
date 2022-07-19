@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        当实参是基本数据类型的值时，实际是将实参的值复制一份传递给形参, 在函数运行结束前形参被释放。而实<br>
+            参中的值不会变化。当实参是引用类型的值时，实际是将实参的内存地址传递给形参，即实参和形参都指<br>
+            向相同的内存地址，此时形参可以修改实参的值，但是不能修改实参的内存地址。<br>
+
+    </p><hr>
+    <p>arguments</p>
+        arguments对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，是一个类数组结构，之<br>
+            所以说arguments对象是一个类数组结构,是因为它除了具有length属性之外，不具有数组的一些常用方法。<br>
+
+    <script>
+        function text(a,b,c,d){
+            console.log(a);
+            console.log(b);
+            console.log(c);
+            console.log(d);
+        }
+        //形参与实参的类型没有过多的要求
+        text(2,'乔',function(){},[]);
+        //需要注意,形参与实参，在外部都访问不了
+        //console.log(a)报错
+
+        var arg = {name:'小乔'};
+        function fun(param){
+            param.name = '小卿';
+        }
+        fun(arg);
+        console.log(arg);//{name: '小卿'}
+
+        console.log('-------------------------------');
+
+        //伪数组只有长度的方法，而其他的数组方法都不能使用
+        //arguments对象的性质
+        function foo(){
+            //arguments获取传入的实参个数
+            //console.log(arguments.length);
+            if(arguments.length == 0){
+                console.log('不能处理，没有参数');
+            }else{
+                console.log('您传入的参数有：'+arguments.length+'个');
+            }
+            function test(){
+                console.log(arguments.length);//0
+            }
+            test();
+        }
+        foo(1,2,3,4,5);//5
+
+        //console.log(arguments.length)报错，外部不能获取，找不到
+        console.log('-------------------------------');
+
+        /* 通过索引访问 arguments对象是一个类数组结构，可以通过索引访问，每一项便是对象传递的实参值，不存在则返回undefined */
+        function sum(){//可写形参
+            /* console.log(arguments[0]);
+            console.log(arguments[1]); */
+            //遍历
+            for (var i = 0; i < arguments.length; i++) {
+                console.log(arguments[i]);
+            }
+        }
+        sum(1,2,3,4,5,6,7);
+        /* 由实参决定 
+            形参不能改变实参，实参可以改变形参
+        */
+        function test(a,b,c){
+            a = 1;
+            b = 2;
+            c = 3;
+            console.log(a,b,c)//1 2 3
+            console.log(arguments[0])//undefined
+            console.log(arguments.length)//0
+        }
+        test();
+
+        console.log('-------------------------------');
+
+        /* 特殊的arguments.callee属性 
+            表明在比较时是严格相等的
+        */
+        function test1(){
+            console.log(arguments.callee === test1);
+        }
+        test1();
+        //arguments.callee用处
+        /* 通过arguments.callee属性获取到函数对象后，
+            可以直接传递参数进行函数的调用，
+            这个属性在匿名的递归(!5)函数中非常有用。 
+        */
+        function test2(){
+            return function(n){
+                if(n<=1) return 1;
+                return n * arguments.callee(n-1)
+            }
+        }
+        console.log(test2()(5))//120
+
+        console.log('-------------------------------');
+
+        /* 通过arguments对传入的任意个数的参数进行处理 */
+        function aa(str){
+            var strArr = Array.prototype.slice.call(arguments,1);
+            return strArr.join(str);
+        }
+        console.log(aa('-','blue','red','yello','black'));
+    </script>
+</body>
+</html>

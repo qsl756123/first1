@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    reduce()函数拥有强大的功能，但在使用上并不被人熟知，reduce0函数的最主要的功能是做累加处理，即接<br>
+        受一个函数作为累加器，将数组中的每-一个元素从左到右执行累加器，返回最终的结果。<br>
+    语法：arr.reduce(callback,[,initalvalue]);<br>
+    
+    initialalue用作callback的第一个参数值， 如果没有设置，则会使用数组的第一个元素值.<br>
+    
+    callback会接收4个参数(accumulator, currentValue, currentIndex, array )。<br>
+    ●accumulator表示上一次调用累加器的返回值，或设置的initialVvalue值。 如果设置了initialValue, 则<br>
+        accumulator=initiaValue;否则accumulator=数组的第一个元素值.<br>
+    ●currentValue表示数组正在处理的值。<br>
+    ●currentIndex表示当前正在处理值的索引，如果设置了initialValue.则cunrentIndex从0开始,否则从1开始。<br>
+    ●array表示数组本身。
+
+    <script>
+        //累加
+        var arr = [1,2,3,4,5];
+        var sum = arr.reduce(function(accumulator,currentValue){
+            return accumulator+currentValue;
+        })
+        console.log(sum);
+
+        //求出现次数
+        var arr = [1,2,2,3,3,3,4,4,4,4,4]; 
+        var dd = function(arr){
+            //return 返回内容加入到对应得对象中
+            return arr.reduce(function(accumulator,currentValue){
+                accumulator[currentValue] ? accumulator[currentValue] ++ : accumulator[currentValue] = 1;
+                return accumulator;
+            },{})
+        }
+        console.log(dd(arr))
+    </script>
+</body>
+</html>

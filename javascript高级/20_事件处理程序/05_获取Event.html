@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <b>Event对象学习目标：</b><br>
+        事件在浏览器中是以Event对象的形式存在的，每触发一个事件， 就会产生-个Event对象， 该对象包含所有<br>
+        与事件相关的信息，包括事件的元素,事件的类型及其他与特定事件相关的信息。<br>
+        Event对象有一系列的属性和函数，但是考虑到使用频率的情况，我们不会一-介绍, 我们会选择其中比较重<br>
+        要得特性通过实例讲解。<br>
+        因为Event对象在不同浏览器中的实现是差异性的，这里我们事先准备好不同的浏览器进行测试。<br>
+    </p><hr>
+    <p>
+        <b>Event对象获取：</b><br>
+        在给元素绑定特定的事件处理程序时，可以获取到Event对象，但是考虑到不同浏览器的差异性，获取Event<br>
+        对象的方式也不同。<br>
+        获取Event对象的方式有以下两种:<br>
+        1.在事件处理程序中，Event对象会作为参数传入， 参数名为event,<br>
+        2.在事件处理程序中，通过window.event属性 获取Event对象。<br>
+        我们在同一个事件处理程序中，可以使用上述两种方式获取event对象并输出。<br>
+    </p><hr>
+    
+    <button id="btn">单击</button>
+    <script>
+        var btn = document.getElementById('btn');
+        btn.addEventListener('click',function(event){
+            //console.log(event);
+            console.log(window.event);//可以兼容IE
+        })
+    </script>
+</body>
+</html>

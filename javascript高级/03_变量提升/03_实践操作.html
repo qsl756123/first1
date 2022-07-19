@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        理解变量提升和函数提升可以使我们更了解这门语言，更好地驾驭它,但是在开发中,我们不应该使用这些
+            技巧,而是要规范我们的代码I做到可读性和可维护性。
+       
+    具体的做法是:无论变量还是函数,🔺都必须先声明后使用。下面举了简单的例子:
+     -->
+     <script>
+         let name = 'Scott';
+         let sayHello = function(guest){
+             console.log(name,'say hello to',guest);
+         }
+         let guest = ['john','Tom','Jack'];
+         for(let i = 0 ; i < guest.length ; i++){
+             guest = guest[i];
+             sayHello(guest);
+         }
+
+         //var 在循环中有一个穿透问题
+         /* for (var i = 0; i < 5; i++) {
+             console.log(i);
+         }
+         console.log(i); 会输出0，1，2，3，4，5*/
+         for (let i = 0; i < 5; i++) {
+             console.log(i);
+         }
+         console.log(i);//报错
+     </script>
+</body>
+</html>

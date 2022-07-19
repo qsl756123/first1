@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var person = {
+            1:123,
+            name:'123'
+        }
+        console.log(person.name)//123
+        //console.log(person.1)//报错
+        //点和中括号的区别 在操作数值时 使用[]
+        console.log(person[1]);//123
+
+        var person1 = {
+            name:'123'
+        }
+        var myname = 'name';
+        console.log(person.myname);//undefined 不加括号当作变量解析
+        console.log(person[myname])//123 
+
+        /* 如果属性名中包含会导致语法错误的字符，或者属性名中含有关键
+            字或者保留字，可以使用中括号操作符，不能使用点操作符
+        */
+       var person1 = {
+           ['first name'] : '小刘'
+       }
+       console.log(person1['first name']);
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三者函数的用法</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        /* 求数组中的最值 */
+        var arr = [1,2,3,4,5,6,7,8,9];
+        console.log(Math.max.apply(null,arr));//9
+        console.log(Math.min.apply(null,arr));//1
+
+        console.log('----------------------------');
+
+        /* 类数组对象转换为数组对象 */
+        /* var div = document.getElementsByTagName('div');
+        console.log(div); */
+        //通用求和函数
+        function sum(){
+            //通过call()函数间接调用数组的slice()函数，以得到函数参加的数组
+            var arr = Array.prototype.slice.call(arguments);
+            //调用数组的reduce()函数进行多个值的求和
+            return arr.reduce(function(pre,cur){
+                return pre+cur;
+            },0)
+        }
+        console.log(sum(1,2));//3
+        console.log(sum(1,2,2,3,4));//12
+        console.log(sum(1,2,123,123));//249
+
+        console.log('----------------------------');
+
+        //遍历数组中对象的所有属性
+        var animals = [
+            {species:'Lion',name:'小乔'},
+            {species:'whale',name:'小卿'}
+        ]
+        for (var i = 0; i < animals.length; i++) {
+            (function(i){
+                this.print = function(){
+                    console.log(this['species']+this['name'])
+                }
+                this.print();
+            }).call(animals[i],i)
+        }
+    </script>
+</body>
+</html>

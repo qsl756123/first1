@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./03_EventUilt.js"></script>
+</head>
+<body>
+    <ul>
+        <li>
+            <p>姓名：小乔</p>
+            <p>学号：202139040450</p>
+            <button id="btn">单机</button>
+        </li>
+    </ul>
+    <script>
+        var oLi = document.querySelector('li');
+        var OBtn = document.querySelector('#btn');
+        oLi.addEventListener('click',function(){
+            console.log('li监听到了事件');
+        });
+        OBtn.addEventListener('click',function(event){
+            console.log('button监听到了事件');
+            //阻止冒泡事件
+            event.stopPropagation();
+            
+            //阻止冒泡事件并阻止后面事件的触发
+            /* var event = EventUtil.getEvent(event);
+            event.stopImmediatePropagation(); */
+        });
+        OBtn.addEventListener('click',function(){
+            console.log('button监听到了第二个事件');
+        });
+    </script>
+</body>
+</html>

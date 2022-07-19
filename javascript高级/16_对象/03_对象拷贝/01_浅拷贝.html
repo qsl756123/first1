@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //对象拷贝（叫法不同，克隆等）
+        var a = [1,2,3]; //引用地址 ,改变一个会全部改变
+        var b = a;
+        console.log(b);//1,2,3
+        b[1] = 4;
+        console.log(b);//1,4,3
+        console.log(a);//1,4,3
+
+        var c = 1; //值类型数据 ，不会影响原数据
+        var d = c;
+        d = 2;
+        console.log(c);//1
+        console.log('------------------------');
+
+        /* 浅拷贝例子 */
+        var origin = {
+            a:1,
+            b:[1,2,3],
+            c:{
+                d:'name'
+            }
+        };
+        var obj = origin;
+        console.log(obj);
+        obj.b[2] = 5;//此时origin中的b属性的值也改成了[1,2,5]
+        console.log(origin.b[2]);//5
+        /* 简单的引用复制 */
+        //遍历对象最外层的所有属性，直接将属性值复制到另一个变量中。
+        function showClone(origin){
+            var result = {};
+            for(key in origin){
+                if(origin.hasOwnProperty(key)){
+                    result[key] = origin[key];
+                }
+            }
+            return result;
+        }
+        console.log(showClone(origin));
+        console.log(origin);
+        //ES6语法Object.assign()函数用于将原对象的可枚举属性赋值到目标对象中
+        var result = Object.assign({},origin);
+        console.log(result);
+        console.log(origin);
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        function removeRepeat(str){
+            //创建对象
+            var json = {};
+            //创建一个数组
+            var result = [];
+            //遍历循环 将单独的字符添加到对象中
+            for (let i = 0; i < str.length; i++) {
+                if(!json[str[i]]){
+                    //将数据添加到json对象中
+                    json[str[i]] = true
+                    result.push(str[i])
+
+                }
+            }
+            return result.join('')
+        }
+        var str = 'hellojavascripthellohtmlhellocss'
+        console.log(removeRepeat(str));
+    </script>
+</body>
+</html>

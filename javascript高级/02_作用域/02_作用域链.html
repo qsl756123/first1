@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域链</title>
+</head>
+<body>
+    <!-- 
+        我们学习作用域，局部作用域和全局作用域的目的：
+        1、变量的全局污染问题
+        2、使用变量时的重复命名
+     -->
+    <script>
+        /* 作用域链 */
+        //自由变量
+        // var a = 100;
+        // function fun(){
+        //     var b = 200;
+        //     console.log(b);
+        //     function fun1(){
+        //         console.log(a);//此时的a在这里就是一个自由变量
+        //         /* 
+        //             依旧会输出100
+        //             一层一层的往外找，从父作用域一直找到全局作用域中
+        //             找到就输出，没有就报错
+        //             这个就是作用域链*/
+        //     }
+        //     fun1();
+        // }
+        // fun();
+        
+        /* 上述的说法有点问题 
+            应该是在创建的函数的那个域中找，一直找到全局作用域
+        */
+        var a = 10;
+        function fn(){
+            console.log(a);
+        }
+        fn();
+        function show(){
+            var a = 20;
+            fn();//找的是创建的函数的作用域10，而不是上方的20
+        }
+        show();
+        /* 
+        此处输出的是；
+        10
+        10
+        */
+
+        
+    </script>
+</body>
+</html>

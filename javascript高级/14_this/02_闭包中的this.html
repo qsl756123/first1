@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 闭包中的this */
+        //var sport = 'basketball';
+        var user = {
+            sport:'basketball',
+            data:[
+                {name:'小乔',age:18},
+                {name:'小卿',age:18}
+            ],
+            clickHander:function(){
+                var _this = this;
+                //此时的this指向的是user对象
+                this.data.forEach(function(person){
+                    console.log(_this);//user
+                    console.log(person.name + ' is playing ' + _this.sport);
+                })
+            }
+        }
+        user.clickHander();
+
+        function f(k){
+            this.m = k;
+            return this;
+        }
+        var m = f(1);
+        console.log(m);//window
+        var n = f(2);
+        console.log(n);//window
+        console.log(m.n)//undefined
+        console.log(n.m)//2
+    </script>
+</body>
+</html>

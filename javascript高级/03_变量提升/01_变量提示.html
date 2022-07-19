@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1、变量提升是js语言的问题，或是开发人员不遵守规则导致的
+        2、变量提升是不应该存在的，我们在写程序的时候要先声明再调用
+        3、封装的类库，应该包裹在{} 它才会形成自己的作用域不会和其他的库和其他人的代码冲突
+     -->
+    <script>
+        //把调用变量的操作放在声明的前面
+        console.log(a);//undefined 因为下方是处于预处理阶段(仅声明，来不及赋值) var a; a=1
+        var a = 1;
+
+        
+        //console.log(b);//报错
+        function fun(){
+            var b = 1;
+            return b;
+        }
+
+
+        var foo = 111;      //外部的变量不影响局部作用域
+        function hois(){
+            if(!foo){//2、判断foo，此时foo为undefined，！取反为true，进入
+                var foo = 5;//3、赋值为5
+            }
+            console.log(foo);//4、输出为5
+        }
+        hois();//1、调用
+
+
+        /* 首先局部变量foo1 = 3 不影响内部，调用后，
+        foo1为false ，所以var foo1 = foo1为假，
+        所以 var foo1 = 5 ,再输出即为5 */
+        var foo1 = 3;
+        function fun1(){
+            var foo1 = foo1 || 5;
+            console.log(foo1)
+        }
+        fun1();
+
+
+        function fun2(){
+            var foo2 = 3;
+            {
+                var foo = 5;
+                //let foo = 5;如果用let就形成块级作用域，外部访问不了，下方输出3
+            }
+            console.log(foo)//输出5
+        }
+        fun2();
+    </script>
+</body>
+</html>

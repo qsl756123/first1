@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 当我们想要创建一个构造函数的实例时，需要使用new操作符,函数执行完成后，
+        函数体中的this就指向了这个实例，通过下面的这个实例可以访问到绑定在this上的属性。
+        */
+        //函数声明
+        function Person(name){
+            this.name = name;
+            
+        }
+        /* //实例化
+        var p = new Person('小乔');
+        //调用
+        console.log(p.name); */
+        Person('小乔');
+        console.log(this.name);
+
+        /* var value = 10;
+        var obj = {
+            value:100,
+            get:function(){
+                console.log(this.value);
+            }
+        }
+        obj.get();//100 this指向的就是调用的那个对象 */
+
+        /* 当我们调用obj.method(函数时，fool函数被执行，但是此时foo0函数的执行是没有所属对象的，因此this
+        会指向全局的window对象，在输出this.value时， 实际是输出window. value,因此输出"10*.
+         */
+        var value = 10;
+        var obj = {
+            value : 100,
+            method:function(){
+                var foo = function(){
+                    console.log(this.value)
+                }
+                foo();
+            }    
+        }
+        obj.method();//10
+        
+        console.log('--------------------------------');
+
+        /* this指向对象实例 */
+        //当通过new操作符调用构造函数生成对象实例时，this指向该实例。
+        var number = 10;
+        function Person(){
+            //复写全局变量
+            number = 10;
+            //this
+            this.number = 30;
+            //console.log(number);30
+        }
+        Person.prototype.name = function(){
+            return this.number;
+        }
+        var p = new Person();
+        console.log(p.number);//30
+
+        console.log('--------------------------------');
+
+        /* this重新绑定对象 */
+        var val = 10;
+        var obj = {
+            val:11
+        }
+        var method = function(){
+            console.log(this.val);
+        }
+        method();//10
+        //绑定obj，现在this就指向obj里
+        method.call(obj);//11
+        method.apply(obj);//11
+        var newMethod = method.bind(obj);
+        newMethod();//11
+    </script>
+</body>
+</html>

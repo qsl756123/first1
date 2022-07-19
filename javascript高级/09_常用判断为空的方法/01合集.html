@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 利用null和undefined来判断变量是否为空 */
+        // ==是会自动转换类型然后进行比较  ===不会转换直接比较
+        var obj;
+        if (obj == null) {
+            console.log(true)
+        } else {
+            console.log(false)
+        }
+        if (obj === undefined) {
+            console.log(true)
+        } else {
+            console.log(false)
+        }
+
+        /* 通过遍历来判断 */
+        var obj1 = {};
+        //判断对象是否为空的函数
+        function isEmpty(obj1){
+            for (key in obj1) {
+                if(obj1.hasOwnProperty(key)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        console.log(isEmpty(obj1))//true 是空的对象
+        /* 我们修改一个空的函数中的原型对象，结果依旧是空函数 */
+        function Person(){};
+        Person.prototype.name = '小乔';
+        //实例化对象
+        var obj2 = new Person();
+        console.log(isEmpty(obj2))
+
+        /* 判断是否为空数组 */
+        var arr = [];
+        //通过数组长度(某些特殊情况下需先判断是否为数组)
+        if (arr.instanceOf && arr.length === 0) {
+            console.log('我是空数组')
+        } else {
+            console.log('我不是空数组')
+        }
+
+        /* 字符串是否为空 */
+        var str = '  ';
+        //trim()移除空格
+        if (str === '' || str.trim().length == 0) {
+            console.log('我是空字符串')
+        } else {
+            console.log('我不是空字符串')
+        }
+    </script>
+
+</body>
+</html>

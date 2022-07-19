@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //早期自定义对象
+        /* let person = new Object();
+        person.name = '小乔';
+        person.age = 19;
+        person.job = 'Engineer';
+        person.sayname = function(){
+            console.log(this.name);
+        };
+        console.log(person.name);
+        person.sayname(); */
+
+        //更流行的方式 字面量形式创建对象
+        let person = {
+            name : '小乔',
+            age : 18,
+            configurable:true,
+            job : 'Engineer',
+            sayname(){
+                console.log(this.name);
+            }
+        }
+        console.log(person.name);
+        person.sayname();
+        delete person.name;
+        console.log(person.name);
+        console.log('--------------------------------');
+
+        /* 属性的一些特征：
+            [[configurable]]：是否可以通过delete删除 
+            [[writable]]：是否可以修改
+            [[Enumerable]]：是否可以通过for-in循环返回
+            [[Value]]：属性实际的值
+        */
+        //只读属性writable
+        var person1 = {};
+        Object.defineProperty(person1,'name',{
+            writable:false,//不可修改
+            value:'小乔'
+        })
+        console.log(person1.name);//小乔
+        person1.name = '小卿';
+        console.log(person1.name);//小乔(不可修改)
+        console.log('--------------------------------');
+        
+        //是否可以通过delete删除 configurable
+        var person2 = {};
+        Object.defineProperty(person2,'name',{
+            configurable:true,//是否可以通过delete删除 
+            value:'小乔'
+        })
+        console.log(person2.name);//小乔
+        delete person2.name;
+        console.log(person2.name);//undefined
+
+
+    </script>
+</body>
+</html>

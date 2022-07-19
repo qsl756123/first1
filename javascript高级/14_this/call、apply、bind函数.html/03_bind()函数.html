@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        bind()函数创建一个新的函数，在调用时设置this关键字为提供的值，在执行新函数时，<br>
+            将给定的参数列表作为原函数的参数序列，从前往后匹配，其语法格式如下:
+    </p>
+    <p>
+        call()、apply()、bind()三者函数的比较：<br>
+        三者的相同之处是:都会改变函数调用的执行主体，修改this的指向。<br>
+        不同之处表现在以下两点：<br>
+            1.第一点是关于函数立即执行，call()函数 与apply()函数在执行后会立即调用前面的的数,<br>
+            而bind(函数不会立即调用，它会返回一个新的函数，可以在任何时候进行调用。<br>
+            2.第二点是关于参数传递，call()函数与bind()函数接收的参数相同，第一个参数表示将要改变的函数执行主体，<br>
+                即this的指向，从第二介参数开始到最后一个参数表示的是函数接收的参数:而对于apply()函数。 第一个参数与<br>
+                call()函数，bind()函数相同, 第二个参数是一个数组，表示的是接收的所有参数,如果第二个参数不是一个有<br>
+                效的数组或者arguments对象,则会抛出一个TypeError异常。
+
+    </p>
+    <script>
+        //定义一个add函数
+        function add(num,num1){
+            console.log(num+num1);
+        }
+        //console.log(add(1,2));
+        //定义myAddBind()函数
+        function myAddBind(x,y){
+            //绑定add()函数 apply这里使用的是数组
+            var bindfn = add.bind(this,x,y);
+            return bindfn();
+        }
+        myAddBind(1,2)
+    </script>
+</body>
+</html>
